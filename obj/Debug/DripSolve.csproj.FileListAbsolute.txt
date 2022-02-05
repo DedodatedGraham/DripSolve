@@ -1,0 +1,10 @@
+C:\Users\graha\source\repos\DripSolve\bin\Debug\DripSolve.exe.config
+C:\Users\graha\source\repos\DripSolve\bin\Debug\DripSolve.exe
+C:\Users\graha\source\repos\DripSolve\bin\Debug\DripSolve.pdb
+C:\Users\graha\source\repos\DripSolve\obj\Debug\DripSolve.csproj.AssemblyReference.cache
+C:\Users\graha\source\repos\DripSolve\obj\Debug\DripSolve.Form1.resources
+C:\Users\graha\source\repos\DripSolve\obj\Debug\DripSolve.Properties.Resources.resources
+C:\Users\graha\source\repos\DripSolve\obj\Debug\DripSolve.csproj.GenerateResource.cache
+C:\Users\graha\source\repos\DripSolve\obj\Debug\DripSolve.csproj.CoreCompileInputs.cache
+C:\Users\graha\source\repos\DripSolve\obj\Debug\DripSolve.exe
+C:\Users\graha\source\repos\DripSolve\obj\Debug\DripSolve.pdb

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DripSolve", "DripSolve.csproj", "{ACC66AE1-05B0-4023-BCD8-4BC039A478A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACC66AE1-05B0-4023-BCD8-4BC039A478A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC66AE1-05B0-4023-BCD8-4BC039A478A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC66AE1-05B0-4023-BCD8-4BC039A478A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC66AE1-05B0-4023-BCD8-4BC039A478A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10B20071-8E41-4123-B92C-1DDB5F13B11F}
+	EndGlobalSection
+EndGlobal
