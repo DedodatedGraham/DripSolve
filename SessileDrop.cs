@@ -69,7 +69,7 @@ namespace DripSolve
         public List<double> theta { get; set; }
         public List<double> s { get; set; }
         #endregion
-        public SessileDrop(double ContactAngle, double BondNumber, double Step)
+        public SessileDrop(double ContactAngle, double BondNumber, double Step,double itLimit)
         {
             //Math uses radians, can be converted into deg later for processing
             alpha = ContactAngle * (Math.PI / 180);
@@ -85,6 +85,7 @@ namespace DripSolve
             s = new List<double>();
             s.Add(s0);
             s.Add(s0 + ds);
+            iL = itLimit;
         }
 
 

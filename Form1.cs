@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,59 +11,108 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
+
 namespace DripSolve
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MaterialForm
     {
+        #region Sessile Drop Place Holders
         public SessileDrop testcase;
+        public double Bond;
+        public double ContactAngle;
+        public double Step;
+        #endregion
 
+        readonly MaterialSkin.MaterialSkinManager materialSkinManager;
         public Form1()
         {
-            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
-            testcase = new SessileDrop(70, 1.5, .001);
-            testcase.Solve();
+            materialSkinManager = MaterialSkin.MaterialSkinManager.Instance;
+            materialSkinManager.EnforceBackcolorOnAllComponents = true;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Indigo100, TextShade.WHITE);
 
-           
+            this.Visible = true;
+            this.WindowState = FormWindowState.Maximized;
 
+        }
+        private void ContactAngleBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!(ContactAngleBox.Text is null) && ContactAngleBox.Text.Length != 0)
+            {
+                ContactAngle = double.Parse(ContactAngleBox.Text);
+            }
+        }
+        private void BondBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!(BondBox.Text is null) && BondBox.Text.Length != 0)
+            {
+
+                Bond = double.Parse(BondBox.Text);
+            }
+        }
+
+
+
+        private void
+            StepBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!(StepBox.Text is null) && StepBox.Text.Length != 0)
+            {
+                Step = double.Parse(StepBox.Text);
+            }
+        }
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            testcase = new SessileDrop(ContactAngle, Bond, Step, materialSlider1.Value);
+            ContactAngleBox.Visible = false;
+            BondBox.Visible = false;
+            StepBox.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
+            label3.Visible = false;
+            InitalizeButton.Visible = false;
+            SolveButton.Visible = true;
         }
 
         private void SolveButton_Click(object sender, EventArgs e)
         {
+            testcase.Solve();
+            SolveButton.Visible = false;
+
+            double low = - testcase.z[testcase.z.Count - 1];
             DataTable dt = new DataTable();
             dt.Columns.Add("X", typeof(double));
             dt.Columns.Add("Z", typeof(double));
-            dt.BeginLoadData();
+            dt.Columns.Add("surfaceZ", typeof(double));
             for (int i = 0; i < testcase.x.Count; i++)
             {
-                dt.Rows.Add(testcase.x[i], -testcase.z[i]);
+                dt.Rows.Add(-testcase.x[testcase.x.Count - 1 - i], -testcase.z[testcase.z.Count - 1 - i],low);
+                
+                //left side
+            }
+            for (int i = 0; i < testcase.x.Count; i++)
+            {
+                //right side
+                dt.Rows.Add(testcase.x[i], -testcase.z[i],low);
             }
 
-
             chart1.DataSource = dt;
-            chart1.Name = "Shape";
-            chart1.Series["Shape"].XValueMember = "X";
-            chart1.Series["Shape"].YValueMembers = "Z";
-            chart1.Series["Shape"].ChartType = SeriesChartType.Line;
+            chart1.Series["SessileShape"].XValueMember = "X";
+            chart1.Series["SessileShape"].YValueMembers = "Z";
+            chart1.Series["SessileShape"].ChartType = SeriesChartType.Line;
             chart1.ChartAreas[0].AxisY.LabelStyle.Format = "";
-            SolveButton.Visible = false;
+
+
+            chart1.Series["Surface"].XValueMember = "X";
+            chart1.Series["Surface"].YValueMembers = "surfaceZ";
+            chart1.Series["Surface"].ChartType = SeriesChartType.Line;
+
             chart1.Visible = true;
-        }
 
-        private void sessiledropButton_Click(object sender, EventArgs e)
-        {
-            sessiledropButton.Visible = false;
-            SolveButton.Visible = true;
-        }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void geometryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //This is where we will input the Initial Values needed to find the Geometry
 
         }
     }
