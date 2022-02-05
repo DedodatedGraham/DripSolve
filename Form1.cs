@@ -17,6 +17,7 @@ namespace DripSolve
 
         public Form1()
         {
+            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
             testcase = new SessileDrop(70, 1.5, .001);
             testcase.Solve();
@@ -51,6 +52,17 @@ namespace DripSolve
         {
             sessiledropButton.Visible = false;
             SolveButton.Visible = true;
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void geometryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //This is where we will input the Initial Values needed to find the Geometry
+
         }
     }
 }
