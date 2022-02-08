@@ -7,9 +7,8 @@ namespace DripSolve
 {
     public class SessileDrop
     {
-        //itteration limit to prevent stack overflows / can be changed
+        //itteration limit to prevent stack overflows / can be changed by program
         public double iL { get; set; } = 1000000;
-
 
         #region inital Conditions
         private static double x0 = 0;
@@ -18,25 +17,17 @@ namespace DripSolve
         private static double s0 = 0;
 
         //Assigned Variables that are static but given in creation to limit the solver
-        private double alpha;
-        private double bond;
+        public double alpha;
+        public double bond;
         private double ds;
         public string type;
         #endregion
 
-
-
-        #region tempvars
-        private double tempx;
-        private double tempz;
-        private double temptheta;
-        private double temps;
-        #endregion
-
         #region Governing Equations
+
         public Func<double, double> dxds = delegate (double t)
         {
-            //t is theta in radians
+            //t is theta in radians 
             return Math.Cos(t);
         };
         Func<double, double> dzds = delegate (double t)
@@ -89,13 +80,13 @@ namespace DripSolve
         }
 
 
-        public void Solve()
+        public bool Solve()
         {
 
             int index = 1;
 
             //solve loop
-            while ((theta[theta.Count - 1] < alpha) && (index <= iL))
+            while ((theta[theta.Count - 1] <= alpha) && (index <= iL))
             {
                 #region TempData
                 //used for passing information into dthetads
@@ -136,22 +127,73 @@ namespace DripSolve
                     z.Add(z[index - 1] + (3 / 2) * ds * dzds(theta[index - 1]) - (1 / 2) * ds * dzds(theta[index - 2]));
                 }
                 #endregion
-                s.Add(s[s.Count - 1] + ds);
-                index++;
+
+                //this will prevent an extra s and index falling into the lists
+                if(theta[theta.Count - 1] <= alpha)
+                {
+
+                    s.Add(s[s.Count - 1] + ds);
+                    index++;
+                }
 
             }
 
+            //Overshoot Correction
+            if (theta[theta.Count -1 ] > alpha)
+            {
+                #region temp
+                //index i dont wana use here,
+                //count is 1 higher than index var of whats needed
+                List<double> tempList = new List<double>();
+                tempList.Add(bond);
+                tempList.Add(z[z.Count - 2]);
+                tempList.Add(theta[theta.Count - 2]);
+                tempList.Add(x[theta.Count - 2]);
 
+                List<double> tempList2 = new List<double>();
+                tempList2.Add(bond);
+                tempList2.Add(z[z.Count - 3]);
+                tempList2.Add(theta[theta.Count - 3]);
+                tempList2.Add(x[x.Count - 3]);
+                #endregion
+                //interpolate to find the "ds" until the angle would correctly equal alpha
+                double tds = ds * ((alpha - theta[theta.Count - 2]) / (theta[theta.Count - 1] - theta[theta.Count - 2]));
+                //then overwrite the Last AB2 method to correct
+                theta[theta.Count - 1] = theta[theta.Count - 2] + (3 / 2) * tds * dthetads(tempList) - (1 / 2) * tds * dthetads(tempList2);
+                x[x.Count - 1] = x[x.Count - 2] + (3 / 2) * tds * dxds(theta[theta.Count - 2]) - (1 / 2) * ds * dxds(theta[theta.Count - 2]);
+                z[z.Count - 1] = z[z.Count - 2] + (3 / 2) * tds * dzds(theta[theta.Count - 2]) - (1 / 2) * ds * dzds(theta[theta.Count - 2]);
+            }
+
+            //if recursion Limit is reached, Will return error
             if (index >= iL)
             {
-                Debug.WriteLine("Error: Itteration Limit Reached");
+                return false;
+            }
+            else
+            {
+                return true;
             }
 
 
 
         }
 
-
+        public double getDimlessVolume()
+        {
+            double vol = 0;
+            for(int i = 0; i < x.Count - 1; i++)
+            {
+                //this will run through each point, essentially find all the radi(from edge of curve to ) and use pi*r^2 for each
+                //trad will be the steps area from a front persepctive, using an 
+                double theight = Math.Abs(z[i+1] - z[i]);//height from top to bottom of integration
+                double twidth = x[i+1];//width of section goes from 0 to the bottom point X
+                double trad = theight * twidth;//this will get the general rectangle
+                trad = trad - (theight * Math.Abs(x[i+1]-x[i]))/2 ;//Finally we take away the triangle to complete the trapezoid method
+                Debug.WriteLine(trad.ToString());
+                vol = vol + Math.PI * Math.Pow(trad, 2);
+            }
+            return vol;
+        }
 
 
     }

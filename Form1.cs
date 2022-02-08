@@ -36,6 +36,9 @@ namespace DripSolve
             this.Visible = true;
             this.WindowState = FormWindowState.Maximized;
 
+            chart1.ChartAreas[0].AxisX.Minimum = -1.0;
+            chart1.ChartAreas[0].AxisX.Maximum =  1.0;
+
         }
         private void ContactAngleBox_TextChanged(object sender, EventArgs e)
         {
@@ -79,41 +82,63 @@ namespace DripSolve
 
         private void SolveButton_Click(object sender, EventArgs e)
         {
-            testcase.Solve();
+            bool pass = testcase.Solve();
             SolveButton.Visible = false;
 
-            double low = - testcase.z[testcase.z.Count - 1];
-            DataTable dt = new DataTable();
-            dt.Columns.Add("X", typeof(double));
-            dt.Columns.Add("Z", typeof(double));
-            dt.Columns.Add("surfaceZ", typeof(double));
-            for (int i = 0; i < testcase.x.Count; i++)
+            if (pass)
             {
-                dt.Rows.Add(-testcase.x[testcase.x.Count - 1 - i], -testcase.z[testcase.z.Count - 1 - i],low);
+                double low = -testcase.z[testcase.z.Count - 1];
+                DataTable dt = new DataTable();
+                dt.Columns.Add("X", typeof(double));
+                dt.Columns.Add("Z", typeof(double));
+                dt.Columns.Add("surfaceZ", typeof(double));
+                for (int i = 0; i < testcase.x.Count; i++)
+                {
+                    dt.Rows.Add(-testcase.x[testcase.x.Count - 1 - i], -testcase.z[testcase.z.Count - 1 - i], low);
+
+                    //left side
+                }
+                for (int i = 0; i < testcase.x.Count; i++)
+                {
+                    //right side
+                    dt.Rows.Add(testcase.x[i], -testcase.z[i], low);
+                }
+
+                chart1.DataSource = dt;
+                chart1.Series["SessileShape"].XValueMember = "X";
+                chart1.Series["SessileShape"].YValueMembers = "Z";
                 
-                //left side
+                chart1.Series["SessileShape"].ChartType = SeriesChartType.Line;
+                chart1.ChartAreas[0].AxisY.LabelStyle.Format = "";
+
+
+                chart1.Series["Surface"].XValueMember = "X";
+                chart1.Series["Surface"].YValueMembers = "surfaceZ";
+                chart1.Series["Surface"].ChartType = SeriesChartType.Line;
+
+                chart1.ChartAreas[0].AxisY.Maximum = 0.1;
+                chart1.ChartAreas[0].AxisY.Minimum =Math.Floor(low * 10) / 10;
+
+                chart1.Visible = true;
+                Bnd.Visible = true;
+                CA.Visible = true;
+                DimlessVol.Visible = true;
+                label7.Visible = true;
+                label6.Visible = true;
+                label5.Visible = true;
+
+                Bnd.Text =testcase.bond.ToString() ;
+                CA.Text = (testcase.alpha * (180/Math.PI)).ToString();
+                DimlessVol.Text = testcase.getDimlessVolume().ToString();
             }
-            for (int i = 0; i < testcase.x.Count; i++)
+            else
             {
-                //right side
-                dt.Rows.Add(testcase.x[i], -testcase.z[i],low);
+                label4.Visible = true;
             }
-
-            chart1.DataSource = dt;
-            chart1.Series["SessileShape"].XValueMember = "X";
-            chart1.Series["SessileShape"].YValueMembers = "Z";
-            chart1.Series["SessileShape"].ChartType = SeriesChartType.Line;
-            chart1.ChartAreas[0].AxisY.LabelStyle.Format = "";
-
-
-            chart1.Series["Surface"].XValueMember = "X";
-            chart1.Series["Surface"].YValueMembers = "surfaceZ";
-            chart1.Series["Surface"].ChartType = SeriesChartType.Line;
-
-            chart1.Visible = true;
 
 
 
         }
+
     }
 }
