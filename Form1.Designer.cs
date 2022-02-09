@@ -30,11 +30,14 @@ namespace DripSolve
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Tabs = new MaterialSkin.Controls.MaterialTabControl();
             this.SettingPage = new System.Windows.Forms.TabPage();
             this.materialSlider1 = new MaterialSkin.Controls.MaterialSlider();
@@ -56,10 +59,13 @@ namespace DripSolve
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.PlotButton = new MaterialSkin.Controls.MaterialButton();
             this.Tabs.SuspendLayout();
             this.SettingPage.SuspendLayout();
             this.SessileDropPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // Tabs
@@ -105,6 +111,8 @@ namespace DripSolve
             // 
             this.SessileDropPage.BackColor = System.Drawing.Color.DimGray;
             this.SessileDropPage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SessileDropPage.Controls.Add(this.PlotButton);
+            this.SessileDropPage.Controls.Add(this.chart2);
             this.SessileDropPage.Controls.Add(this.label7);
             this.SessileDropPage.Controls.Add(this.label6);
             this.SessileDropPage.Controls.Add(this.label5);
@@ -299,23 +307,23 @@ namespace DripSolve
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
             this.chart1.Location = new System.Drawing.Point(2, -1);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Surface";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "SessileShape";
-            this.chart1.Series.Add(series1);
-            this.chart1.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.Name = "Surface";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Legend = "Legend1";
+            series6.Name = "SessileShape";
+            this.chart1.Series.Add(series5);
+            this.chart1.Series.Add(series6);
             this.chart1.Size = new System.Drawing.Size(979, 611);
             this.chart1.TabIndex = 7;
             this.chart1.Text = "chart1";
@@ -348,6 +356,42 @@ namespace DripSolve
             this.label7.Text = "Bond Number:";
             this.label7.Visible = false;
             // 
+            // chart2
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart2.Legends.Add(legend3);
+            this.chart2.Location = new System.Drawing.Point(987, 32);
+            this.chart2.Name = "chart2";
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart2.Series.Add(series4);
+            this.chart2.Size = new System.Drawing.Size(875, 407);
+            this.chart2.TabIndex = 16;
+            this.chart2.Text = "chart2";
+            // 
+            // PlotButton
+            // 
+            this.PlotButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.PlotButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.PlotButton.Depth = 0;
+            this.PlotButton.HighEmphasis = true;
+            this.PlotButton.Icon = null;
+            this.PlotButton.Location = new System.Drawing.Point(1418, 519);
+            this.PlotButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.PlotButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.PlotButton.Name = "PlotButton";
+            this.PlotButton.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.PlotButton.Size = new System.Drawing.Size(113, 36);
+            this.PlotButton.TabIndex = 18;
+            this.PlotButton.Text = "Add To Plot";
+            this.PlotButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.PlotButton.UseAccentColor = false;
+            this.PlotButton.UseVisualStyleBackColor = true;
+            this.PlotButton.Click += new System.EventHandler(this.PlotButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,6 +408,7 @@ namespace DripSolve
             this.SessileDropPage.ResumeLayout(false);
             this.SessileDropPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -393,6 +438,8 @@ namespace DripSolve
         private System.Windows.Forms.TextBox DimlessVol;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private MaterialSkin.Controls.MaterialButton PlotButton;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }
 

@@ -183,16 +183,31 @@ namespace DripSolve
             double vol = 0;
             for(int i = 0; i < x.Count - 1; i++)
             {
-                //this will run through each point, essentially find all the radi(from edge of curve to ) and use pi*r^2 for each
-                //trad will be the steps area from a front persepctive, using an 
-                double theight = Math.Abs(z[i+1] - z[i]);//height from top to bottom of integration
-                double twidth = x[i+1];//width of section goes from 0 to the bottom point X
-                double trad = theight * twidth;//this will get the general rectangle
-                trad = trad - (theight * Math.Abs(x[i+1]-x[i]))/2 ;//Finally we take away the triangle to complete the trapezoid method
+                double theight = Math.Abs(z[i+1] - z[i]);
+                double twidth = x[i+1];
+                double trad = theight * twidth;
+                trad = trad - (theight * Math.Abs(x[i+1]-x[i]))/2 ;
                 Debug.WriteLine(trad.ToString());
                 vol = vol + Math.PI * Math.Pow(trad, 2);
             }
             return vol;
+        }
+
+        public double getDimVolume(double r0)
+        {
+            double vol = 0;
+            for (int i = 0; i < x.Count - 1; i++)
+            {
+                //r0 multiplied by all x and z for dim
+                double theight = Math.Abs(z[i + 1] * r0 - z[i] * r0);
+                double twidth = x[i + 1] * r0;
+                double trad = theight * twidth;
+                trad = trad - (theight * Math.Abs(x[i + 1] * r0- - x[i] * r0)) / 2;
+                Debug.WriteLine(trad.ToString());
+                vol = vol + Math.PI * Math.Pow(trad, 2);
+            }
+            return vol;
+
         }
 
 

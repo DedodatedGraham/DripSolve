@@ -129,7 +129,8 @@ namespace DripSolve
 
                 Bnd.Text =testcase.bond.ToString() ;
                 CA.Text = (testcase.alpha * (180/Math.PI)).ToString();
-                DimlessVol.Text = testcase.getDimlessVolume().ToString();
+                double dlessvol = testcase.getDimlessVolume();
+                DimlessVol.Text = dlessvol.ToString();
             }
             else
             {
@@ -140,5 +141,13 @@ namespace DripSolve
 
         }
 
+        private void PlotButton_Click(object sender, EventArgs e)
+        {
+            //chart2;
+
+
+
+
+        }
     }
 }
