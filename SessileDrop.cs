@@ -183,34 +183,26 @@ namespace DripSolve
             double vol = 0;
             for(int i = 0; i < x.Count - 1; i++)
             {
+                //taking a rectangle of points and getting rid of triangle for trapezoid method
                 double theight = Math.Abs(z[i+1] - z[i]);
                 double twidth = x[i+1];
                 double trad = theight * twidth;
                 trad = trad - (theight * Math.Abs(x[i+1]-x[i]))/2 ;
-                Debug.WriteLine(trad.ToString());
                 vol = vol + Math.PI * Math.Pow(trad, 2);
             }
             return vol;
         }
 
-        public double getDimVolume(double r0)
+        public double getDimVolume(double vstar, double r0)
         {
-            double vol = 0;
-            for (int i = 0; i < x.Count - 1; i++)
-            {
-                //r0 multiplied by all x and z for dim
-                double theight = Math.Abs(z[i + 1] * r0 - z[i] * r0);
-                double twidth = x[i + 1] * r0;
-                double trad = theight * twidth;
-                trad = trad - (theight * Math.Abs(x[i + 1] * r0- - x[i] * r0)) / 2;
-                Debug.WriteLine(trad.ToString());
-                vol = vol + Math.PI * Math.Pow(trad, 2);
-            }
+            //keep in mind it doesnt use the sessile drop class, but i inculded it here for project
+            
+            //method from converting approximated vstar to a real volume since r0 is the length scale 
+            double vol = vstar * Math.Pow(r0, 3);
             return vol;
-
         }
 
-
+        
     }
 
 }

@@ -30,18 +30,22 @@ namespace DripSolve
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Tabs = new MaterialSkin.Controls.MaterialTabControl();
             this.SettingPage = new System.Windows.Forms.TabPage();
             this.materialSlider1 = new MaterialSkin.Controls.MaterialSlider();
             this.SessileDropPage = new System.Windows.Forms.TabPage();
+            this.PlotButton = new MaterialSkin.Controls.MaterialButton();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.DimlessVol = new System.Windows.Forms.TextBox();
             this.Bnd = new System.Windows.Forms.TextBox();
@@ -56,15 +60,23 @@ namespace DripSolve
             this.ContactAngleBox = new MaterialSkin.Controls.MaterialTextBox();
             this.SolveButton = new MaterialSkin.Controls.MaterialButton();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.Results = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.materialTextBox3 = new MaterialSkin.Controls.MaterialTextBox();
+            this.materialTextBox2 = new MaterialSkin.Controls.MaterialTextBox();
+            this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.materialTextBox1 = new MaterialSkin.Controls.MaterialTextBox();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.PlotButton = new MaterialSkin.Controls.MaterialButton();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.Tabs.SuspendLayout();
             this.SettingPage.SuspendLayout();
             this.SessileDropPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.Results.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +84,7 @@ namespace DripSolve
             // 
             this.Tabs.Controls.Add(this.SettingPage);
             this.Tabs.Controls.Add(this.SessileDropPage);
+            this.Tabs.Controls.Add(this.Results);
             this.Tabs.Depth = 0;
             this.Tabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tabs.ImageList = this.imageList1;
@@ -112,7 +125,6 @@ namespace DripSolve
             this.SessileDropPage.BackColor = System.Drawing.Color.DimGray;
             this.SessileDropPage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SessileDropPage.Controls.Add(this.PlotButton);
-            this.SessileDropPage.Controls.Add(this.chart2);
             this.SessileDropPage.Controls.Add(this.label7);
             this.SessileDropPage.Controls.Add(this.label6);
             this.SessileDropPage.Controls.Add(this.label5);
@@ -137,6 +149,47 @@ namespace DripSolve
             this.SessileDropPage.TabIndex = 0;
             this.SessileDropPage.Text = "Sessile Drop";
             // 
+            // PlotButton
+            // 
+            this.PlotButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.PlotButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.PlotButton.Depth = 0;
+            this.PlotButton.HighEmphasis = true;
+            this.PlotButton.Icon = null;
+            this.PlotButton.Location = new System.Drawing.Point(680, 635);
+            this.PlotButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.PlotButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.PlotButton.Name = "PlotButton";
+            this.PlotButton.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.PlotButton.Size = new System.Drawing.Size(115, 36);
+            this.PlotButton.TabIndex = 18;
+            this.PlotButton.Text = "Save Values";
+            this.PlotButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.PlotButton.UseAccentColor = false;
+            this.PlotButton.UseVisualStyleBackColor = true;
+            this.PlotButton.Visible = false;
+            this.PlotButton.Click += new System.EventHandler(this.PlotButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(460, 628);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Bond Number:";
+            this.label7.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(203, 628);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Contact Angle:";
+            this.label6.Visible = false;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -151,6 +204,7 @@ namespace DripSolve
             // 
             this.DimlessVol.Location = new System.Drawing.Point(127, 691);
             this.DimlessVol.Name = "DimlessVol";
+            this.DimlessVol.ReadOnly = true;
             this.DimlessVol.Size = new System.Drawing.Size(244, 20);
             this.DimlessVol.TabIndex = 12;
             this.DimlessVol.Visible = false;
@@ -159,6 +213,7 @@ namespace DripSolve
             // 
             this.Bnd.Location = new System.Drawing.Point(436, 644);
             this.Bnd.Name = "Bnd";
+            this.Bnd.ReadOnly = true;
             this.Bnd.Size = new System.Drawing.Size(164, 20);
             this.Bnd.TabIndex = 11;
             this.Bnd.Visible = false;
@@ -167,6 +222,7 @@ namespace DripSolve
             // 
             this.CA.Location = new System.Drawing.Point(127, 644);
             this.CA.Name = "CA";
+            this.CA.ReadOnly = true;
             this.CA.Size = new System.Drawing.Size(244, 20);
             this.CA.TabIndex = 10;
             this.CA.Visible = false;
@@ -307,90 +363,229 @@ namespace DripSolve
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
-            this.chart1.Location = new System.Drawing.Point(2, -1);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(-1, -16);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "Surface";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Legend = "Legend1";
-            series6.Name = "SessileShape";
-            this.chart1.Series.Add(series5);
-            this.chart1.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Surface";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "SessileShape";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Lines";
+            series3.YValuesPerPoint = 2;
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(979, 611);
             this.chart1.TabIndex = 7;
             this.chart1.Text = "chart1";
             this.chart1.Visible = false;
             // 
-            // imageList1
+            // Results
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "sessileDrop.png");
-            this.imageList1.Images.SetKeyName(1, "SettingsIcon.png");
+            this.Results.BackColor = System.Drawing.Color.DimGray;
+            this.Results.Controls.Add(this.label10);
+            this.Results.Controls.Add(this.label9);
+            this.Results.Controls.Add(this.materialTextBox3);
+            this.Results.Controls.Add(this.materialTextBox2);
+            this.Results.Controls.Add(this.materialButton2);
+            this.Results.Controls.Add(this.label8);
+            this.Results.Controls.Add(this.materialTextBox1);
+            this.Results.Controls.Add(this.materialButton1);
+            this.Results.Controls.Add(this.materialComboBox1);
+            this.Results.Controls.Add(this.chart2);
+            this.Results.ImageKey = "ResultsIcon.png";
+            this.Results.Location = new System.Drawing.Point(4, 39);
+            this.Results.Name = "Results";
+            this.Results.Size = new System.Drawing.Size(1926, 970);
+            this.Results.TabIndex = 2;
+            this.Results.Text = "Results";
             // 
-            // label6
+            // label10
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(203, 628);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Contact Angle:";
-            this.label6.Visible = false;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(518, 540);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 13);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Real Volume (mm^3)";
             // 
-            // label7
+            // label9
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(460, 628);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Bond Number:";
-            this.label7.Visible = false;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(614, 418);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Angle";
+            this.label9.Visible = false;
+            // 
+            // materialTextBox3
+            // 
+            this.materialTextBox3.AnimateReadOnly = false;
+            this.materialTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.materialTextBox3.Depth = 0;
+            this.materialTextBox3.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBox3.LeadingIcon = null;
+            this.materialTextBox3.Location = new System.Drawing.Point(580, 434);
+            this.materialTextBox3.MaxLength = 50;
+            this.materialTextBox3.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBox3.Multiline = false;
+            this.materialTextBox3.Name = "materialTextBox3";
+            this.materialTextBox3.Size = new System.Drawing.Size(100, 50);
+            this.materialTextBox3.TabIndex = 8;
+            this.materialTextBox3.Text = "";
+            this.materialTextBox3.TrailingIcon = null;
+            this.materialTextBox3.Visible = false;
+            // 
+            // materialTextBox2
+            // 
+            this.materialTextBox2.AnimateReadOnly = false;
+            this.materialTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.materialTextBox2.Depth = 0;
+            this.materialTextBox2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBox2.LeadingIcon = null;
+            this.materialTextBox2.Location = new System.Drawing.Point(447, 556);
+            this.materialTextBox2.MaxLength = 50;
+            this.materialTextBox2.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBox2.Multiline = false;
+            this.materialTextBox2.Name = "materialTextBox2";
+            this.materialTextBox2.Size = new System.Drawing.Size(233, 50);
+            this.materialTextBox2.TabIndex = 7;
+            this.materialTextBox2.Text = "";
+            this.materialTextBox2.TrailingIcon = null;
+            this.materialTextBox2.Visible = false;
+            // 
+            // materialButton2
+            // 
+            this.materialButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton2.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton2.Depth = 0;
+            this.materialButton2.HighEmphasis = true;
+            this.materialButton2.Icon = null;
+            this.materialButton2.Location = new System.Drawing.Point(507, 498);
+            this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton2.Name = "materialButton2";
+            this.materialButton2.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton2.Size = new System.Drawing.Size(116, 36);
+            this.materialButton2.TabIndex = 6;
+            this.materialButton2.Text = "Find Volume";
+            this.materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton2.UseAccentColor = false;
+            this.materialButton2.UseVisualStyleBackColor = true;
+            this.materialButton2.Visible = false;
+            this.materialButton2.Click += new System.EventHandler(this.materialButton2_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(476, 418);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "R0 (mm)";
+            this.label8.Visible = false;
+            // 
+            // materialTextBox1
+            // 
+            this.materialTextBox1.AnimateReadOnly = false;
+            this.materialTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.materialTextBox1.Depth = 0;
+            this.materialTextBox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBox1.LeadingIcon = null;
+            this.materialTextBox1.Location = new System.Drawing.Point(447, 434);
+            this.materialTextBox1.MaxLength = 50;
+            this.materialTextBox1.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBox1.Multiline = false;
+            this.materialTextBox1.Name = "materialTextBox1";
+            this.materialTextBox1.Size = new System.Drawing.Size(100, 50);
+            this.materialTextBox1.TabIndex = 4;
+            this.materialTextBox1.Text = "";
+            this.materialTextBox1.TrailingIcon = null;
+            this.materialTextBox1.Visible = false;
+            // 
+            // materialButton1
+            // 
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = null;
+            this.materialButton1.Location = new System.Drawing.Point(890, 426);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton1.Size = new System.Drawing.Size(112, 36);
+            this.materialButton1.TabIndex = 3;
+            this.materialButton1.Text = "CreatePlot";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton1.UseAccentColor = false;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click_1);
+            // 
+            // materialComboBox1
+            // 
+            this.materialComboBox1.AutoResize = false;
+            this.materialComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialComboBox1.Depth = 0;
+            this.materialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.materialComboBox1.DropDownHeight = 174;
+            this.materialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.materialComboBox1.DropDownWidth = 121;
+            this.materialComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialComboBox1.FormattingEnabled = true;
+            this.materialComboBox1.IntegralHeight = false;
+            this.materialComboBox1.ItemHeight = 43;
+            this.materialComboBox1.Items.AddRange(new object[] {
+            "Sessile Drop"});
+            this.materialComboBox1.Location = new System.Drawing.Point(46, 426);
+            this.materialComboBox1.MaxDropDownItems = 4;
+            this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialComboBox1.Name = "materialComboBox1";
+            this.materialComboBox1.Size = new System.Drawing.Size(321, 49);
+            this.materialComboBox1.StartIndex = 0;
+            this.materialComboBox1.TabIndex = 2;
+            this.materialComboBox1.SelectedIndexChanged += new System.EventHandler(this.materialComboBox1_SelectedIndexChanged);
             // 
             // chart2
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart2.Legends.Add(legend3);
-            this.chart2.Location = new System.Drawing.Point(987, 32);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(15, 12);
             this.chart2.Name = "chart2";
+            this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
             series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series4.Legend = "Legend1";
-            series4.Name = "Series1";
+            series4.Name = "Angle Vs Vstar";
             this.chart2.Series.Add(series4);
-            this.chart2.Size = new System.Drawing.Size(875, 407);
-            this.chart2.TabIndex = 16;
+            this.chart2.Size = new System.Drawing.Size(1033, 385);
+            this.chart2.TabIndex = 0;
             this.chart2.Text = "chart2";
             // 
-            // PlotButton
+            // imageList1
             // 
-            this.PlotButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.PlotButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.PlotButton.Depth = 0;
-            this.PlotButton.HighEmphasis = true;
-            this.PlotButton.Icon = null;
-            this.PlotButton.Location = new System.Drawing.Point(1418, 519);
-            this.PlotButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.PlotButton.MouseState = MaterialSkin.MouseState.HOVER;
-            this.PlotButton.Name = "PlotButton";
-            this.PlotButton.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.PlotButton.Size = new System.Drawing.Size(113, 36);
-            this.PlotButton.TabIndex = 18;
-            this.PlotButton.Text = "Add To Plot";
-            this.PlotButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.PlotButton.UseAccentColor = false;
-            this.PlotButton.UseVisualStyleBackColor = true;
-            this.PlotButton.Click += new System.EventHandler(this.PlotButton_Click);
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.DimGray;
+            this.imageList1.Images.SetKeyName(0, "sessileDrop.png");
+            this.imageList1.Images.SetKeyName(1, "SettingsIcon.png");
+            this.imageList1.Images.SetKeyName(2, "ResultsIcon.png");
             // 
             // Form1
             // 
@@ -408,6 +603,8 @@ namespace DripSolve
             this.SessileDropPage.ResumeLayout(false);
             this.SessileDropPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.Results.ResumeLayout(false);
+            this.Results.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
 
@@ -439,7 +636,17 @@ namespace DripSolve
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private MaterialSkin.Controls.MaterialButton PlotButton;
+        private System.Windows.Forms.TabPage Results;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialTextBox materialTextBox1;
+        private System.Windows.Forms.Label label8;
+        private MaterialSkin.Controls.MaterialTextBox materialTextBox2;
+        private MaterialSkin.Controls.MaterialButton materialButton2;
+        private System.Windows.Forms.Label label9;
+        private MaterialSkin.Controls.MaterialTextBox materialTextBox3;
+        private System.Windows.Forms.Label label10;
     }
 }
 

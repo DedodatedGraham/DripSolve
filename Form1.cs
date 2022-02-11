@@ -21,7 +21,14 @@ namespace DripSolve
         public double Bond;
         public double ContactAngle;
         public double Step;
+        public double dlessvol;
         #endregion
+
+        public List<double> dimvolumes;
+        public List<double> contactAngles;
+        public List<double> bonds;
+
+        public List<List<double>> plots;
 
         readonly MaterialSkin.MaterialSkinManager materialSkinManager;
         public Form1()
@@ -32,6 +39,10 @@ namespace DripSolve
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Indigo100, TextShade.WHITE);
+
+            dimvolumes = new List<double>();
+            contactAngles = new List<double>();
+            bonds = new List<double>();
 
             this.Visible = true;
             this.WindowState = FormWindowState.Maximized;
@@ -129,8 +140,16 @@ namespace DripSolve
 
                 Bnd.Text =testcase.bond.ToString() ;
                 CA.Text = (testcase.alpha * (180/Math.PI)).ToString();
-                double dlessvol = testcase.getDimlessVolume();
+                dlessvol = testcase.getDimlessVolume();
                 DimlessVol.Text = dlessvol.ToString();
+
+                
+                    
+                    PlotButton.Visible = true;
+                
+
+
+
             }
             else
             {
@@ -139,15 +158,165 @@ namespace DripSolve
 
 
 
+            
+            
+
         }
 
         private void PlotButton_Click(object sender, EventArgs e)
         {
-            //chart2;
+            //this saves the dimensionless volume and angles for interpolation
+            dimvolumes.Add(dlessvol);
+            contactAngles.Add(testcase.alpha * (180 / Math.PI));
+            bonds.Add(testcase.bond);
 
+            
+            
+            chart1.Visible = false;
+            Bnd.Visible = false;
+            CA.Visible = false;
+            DimlessVol.Visible = false;
+            label7.Visible = false;
+            label6.Visible = false;
+            label5.Visible = false;
+            
+            BondBox.Visible = true;
+            StepBox.Visible = true;
+            ContactAngleBox.Visible = true;
+            label1.Visible = true;
+            label2.Visible = true;
+            label3.Visible = true;
+            InitalizeButton.Visible = true;
+        }
+
+        private void materialComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
 
 
 
         }
+
+        private void materialButton1_Click_1(object sender, EventArgs e)
+        {
+            //decides what to do based on index of the combo box
+            if (materialComboBox1.SelectedIndex == 0 && dimvolumes.Count !=0)
+            {
+                //first we will create the plot of the needed values ordered and with out repeating.
+                plots = orderSessile(dimvolumes, contactAngles);
+
+
+                DataTable tempData = new DataTable();
+                tempData.MinimumCapacity = plots[0].Count;
+
+                tempData.Columns.Add("X");//angles
+                tempData.Columns.Add("Y");//volume
+
+                for(int j = 0; j < plots[0].Count; j++)
+                {
+                    tempData.Rows.Add(plots[0][j],plots[1][j]);
+                }
+
+                chart2.DataSource = tempData;
+                chart2.Series["Angle Vs Vstar"].XValueMember = "X";
+                chart2.Series["Angle Vs Vstar"].YValueMembers = "Y";
+
+                chart2.Series["Angle Vs Vstar"].ChartType = SeriesChartType.Line;
+                chart2.ChartAreas[0].AxisY.LabelStyle.Format = "";
+
+
+                //if sessile drop is selected then it will do this
+                //when plotting 
+
+
+                materialTextBox1.Visible = true;
+                label8.Visible = true;
+                materialTextBox3.Visible = true;
+                label9.Visible = true;
+                materialButton2.Visible = true;
+            }
+
+
+        }
+
+
+        private List<List<double>> orderSessile(List<double> vstar, List<double> ca)
+        {
+            List<List<double>> temp = Sort(ca,vstar);
+            return temp;
+        }
+
+        private List<List<double>> Sort(List<double> sort,List<double> alt)
+        {
+            List<double> t1 = new List<double>();
+            List<double> t2 = new List<double>();
+
+            t1 = sort.Distinct().ToList();
+            for(int i = 0; i < t1.Count;i++)
+            {
+                double temp = 0;
+                int indx = 0;
+                for(int j = 0; j < sort.Count; j++)
+                {
+                    if(sort[j] == t1[i])
+                    {
+                        temp = temp + alt[j];
+                        indx++;
+                    }
+                }
+
+                t2.Add(temp / indx);
+
+            }
+            //this will give us a distinct array of the average alt and only one of each sort
+            //next it will actually sort the list
+
+            for(int i = 0; i < t1.Count - 1; i++)
+            {
+                double y = t1[i];
+                int x = i;
+                for(int j = i + 1; j < t1.Count; j++)
+                {
+                    if(y > t1[j])
+                    {
+                        y = t1[j];
+                        x = j;
+                    }
+                }
+                double temp1 = t1[i];
+                t1[i] = t1[x];
+                t1[x] = temp1;
+                double temp2 = t2[i];
+                t2[i] = t2[x];
+                t2[x] = temp2;
+
+            }
+
+            List<List<double>> ret = new List<List<double>>();
+            ret.Add(t1);
+            ret.Add(t2);
+            return ret;
+        }
+
+        private void materialButton2_Click(object sender, EventArgs e)
+        {
+            //we need to now find the solution of V* for the given angle
+            double angle = double.Parse(materialTextBox3.Text);
+            double tvstar = 0;
+            for(int i = 0; i < plots[1].Count - 1; i++)
+            {
+                //now we will take the average dimensionless value and turn it into what we want
+                if (plots[0][i] <= angle && plots[0][i + 1] >= angle)
+                {
+                    tvstar = plots[1][i] + (plots[1][i + 1] - plots[1][i]) * ((angle - plots[0][i])/(plots[0][i+1] - plots[0][i])) ;
+                    break;
+                }
+            }
+
+
+            materialTextBox2.Text = testcase.getDimVolume(tvstar,double.Parse(materialTextBox1.Text)).ToString();
+            materialTextBox2.Visible = true;
+        }
+
     }
 }
