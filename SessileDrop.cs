@@ -30,13 +30,13 @@ namespace DripSolve
             //t is theta in radians 
             return Math.Cos(t);
         };
-        Func<double, double> dzds = delegate (double t)
+        public Func<double, double> dzds = delegate (double t)
         {
             //t is theta in radians
             return Math.Sin(t);
         };
         //work on this alittle bit
-        Func<List<double>, double> dthetads = delegate (List<double> vars)
+        public Func<List<double>, double> dthetads = delegate (List<double> vars)
         {
             //dtheta/ds = 2 + 
             //vars[0] is Bond number

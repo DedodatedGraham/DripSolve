@@ -72,6 +72,7 @@ namespace DripSolve
             this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.plateflow = new System.Windows.Forms.TabPage();
             this.Tabs.SuspendLayout();
             this.SettingPage.SuspendLayout();
             this.SessileDropPage.SuspendLayout();
@@ -85,15 +86,17 @@ namespace DripSolve
             this.Tabs.Controls.Add(this.SettingPage);
             this.Tabs.Controls.Add(this.SessileDropPage);
             this.Tabs.Controls.Add(this.Results);
+            this.Tabs.Controls.Add(this.plateflow);
             this.Tabs.Depth = 0;
             this.Tabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tabs.ImageList = this.imageList1;
-            this.Tabs.Location = new System.Drawing.Point(3, 64);
+            this.Tabs.Location = new System.Drawing.Point(4, 79);
+            this.Tabs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Tabs.MouseState = MaterialSkin.MouseState.HOVER;
             this.Tabs.Multiline = true;
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(1934, 1013);
+            this.Tabs.Size = new System.Drawing.Size(1934, 1019);
             this.Tabs.TabIndex = 0;
             // 
             // SettingPage
@@ -102,8 +105,9 @@ namespace DripSolve
             this.SettingPage.Controls.Add(this.materialSlider1);
             this.SettingPage.ImageKey = "SettingsIcon.png";
             this.SettingPage.Location = new System.Drawing.Point(4, 39);
+            this.SettingPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SettingPage.Name = "SettingPage";
-            this.SettingPage.Size = new System.Drawing.Size(1926, 970);
+            this.SettingPage.Size = new System.Drawing.Size(1926, 976);
             this.SettingPage.TabIndex = 1;
             this.SettingPage.Text = "Settings";
             // 
@@ -111,11 +115,12 @@ namespace DripSolve
             // 
             this.materialSlider1.Depth = 0;
             this.materialSlider1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialSlider1.Location = new System.Drawing.Point(3, 3);
+            this.materialSlider1.Location = new System.Drawing.Point(4, 4);
+            this.materialSlider1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.materialSlider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSlider1.Name = "materialSlider1";
             this.materialSlider1.RangeMax = 1000000;
-            this.materialSlider1.Size = new System.Drawing.Size(250, 40);
+            this.materialSlider1.Size = new System.Drawing.Size(333, 40);
             this.materialSlider1.TabIndex = 0;
             this.materialSlider1.Text = "Iteration Limit";
             this.materialSlider1.Value = 50000;
@@ -143,9 +148,10 @@ namespace DripSolve
             this.SessileDropPage.Controls.Add(this.chart1);
             this.SessileDropPage.ImageKey = "sessileDrop.png";
             this.SessileDropPage.Location = new System.Drawing.Point(4, 39);
+            this.SessileDropPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SessileDropPage.Name = "SessileDropPage";
-            this.SessileDropPage.Padding = new System.Windows.Forms.Padding(3);
-            this.SessileDropPage.Size = new System.Drawing.Size(1926, 970);
+            this.SessileDropPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SessileDropPage.Size = new System.Drawing.Size(1926, 976);
             this.SessileDropPage.TabIndex = 0;
             this.SessileDropPage.Text = "Sessile Drop";
             // 
@@ -156,8 +162,8 @@ namespace DripSolve
             this.PlotButton.Depth = 0;
             this.PlotButton.HighEmphasis = true;
             this.PlotButton.Icon = null;
-            this.PlotButton.Location = new System.Drawing.Point(680, 635);
-            this.PlotButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.PlotButton.Location = new System.Drawing.Point(907, 782);
+            this.PlotButton.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.PlotButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.PlotButton.Name = "PlotButton";
             this.PlotButton.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -173,9 +179,10 @@ namespace DripSolve
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(460, 628);
+            this.label7.Location = new System.Drawing.Point(613, 773);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 13);
+            this.label7.Size = new System.Drawing.Size(99, 17);
             this.label7.TabIndex = 15;
             this.label7.Text = "Bond Number:";
             this.label7.Visible = false;
@@ -183,9 +190,10 @@ namespace DripSolve
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(203, 628);
+            this.label6.Location = new System.Drawing.Point(271, 773);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 13);
+            this.label6.Size = new System.Drawing.Size(100, 17);
             this.label6.TabIndex = 14;
             this.label6.Text = "Contact Angle:";
             this.label6.Visible = false;
@@ -193,46 +201,51 @@ namespace DripSolve
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(187, 675);
+            this.label5.Location = new System.Drawing.Point(249, 831);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(113, 13);
+            this.label5.Size = new System.Drawing.Size(151, 17);
             this.label5.TabIndex = 13;
             this.label5.Text = "Dimensonless Volume:";
             this.label5.Visible = false;
             // 
             // DimlessVol
             // 
-            this.DimlessVol.Location = new System.Drawing.Point(127, 691);
+            this.DimlessVol.Location = new System.Drawing.Point(169, 850);
+            this.DimlessVol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DimlessVol.Name = "DimlessVol";
             this.DimlessVol.ReadOnly = true;
-            this.DimlessVol.Size = new System.Drawing.Size(244, 20);
+            this.DimlessVol.Size = new System.Drawing.Size(324, 22);
             this.DimlessVol.TabIndex = 12;
             this.DimlessVol.Visible = false;
             // 
             // Bnd
             // 
-            this.Bnd.Location = new System.Drawing.Point(436, 644);
+            this.Bnd.Location = new System.Drawing.Point(581, 793);
+            this.Bnd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Bnd.Name = "Bnd";
             this.Bnd.ReadOnly = true;
-            this.Bnd.Size = new System.Drawing.Size(164, 20);
+            this.Bnd.Size = new System.Drawing.Size(217, 22);
             this.Bnd.TabIndex = 11;
             this.Bnd.Visible = false;
             // 
             // CA
             // 
-            this.CA.Location = new System.Drawing.Point(127, 644);
+            this.CA.Location = new System.Drawing.Point(169, 793);
+            this.CA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CA.Name = "CA";
             this.CA.ReadOnly = true;
-            this.CA.Size = new System.Drawing.Size(244, 20);
+            this.CA.Size = new System.Drawing.Size(324, 22);
             this.CA.TabIndex = 10;
             this.CA.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(133, 107);
+            this.label4.Location = new System.Drawing.Point(177, 132);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(147, 13);
+            this.label4.Size = new System.Drawing.Size(197, 17);
             this.label4.TabIndex = 9;
             this.label4.Text = "Error: Itteration Limit Reached";
             this.label4.Visible = false;
@@ -244,8 +257,8 @@ namespace DripSolve
             this.InitalizeButton.Depth = 0;
             this.InitalizeButton.HighEmphasis = true;
             this.InitalizeButton.Icon = null;
-            this.InitalizeButton.Location = new System.Drawing.Point(163, 138);
-            this.InitalizeButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.InitalizeButton.Location = new System.Drawing.Point(217, 170);
+            this.InitalizeButton.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.InitalizeButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.InitalizeButton.Name = "InitalizeButton";
             this.InitalizeButton.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -260,9 +273,10 @@ namespace DripSolve
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(332, 16);
+            this.label3.Location = new System.Drawing.Point(443, 20);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 13);
+            this.label3.Size = new System.Drawing.Size(51, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "S-Step";
             // 
@@ -273,12 +287,13 @@ namespace DripSolve
             this.StepBox.Depth = 0;
             this.StepBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.StepBox.LeadingIcon = null;
-            this.StepBox.Location = new System.Drawing.Point(300, 32);
+            this.StepBox.Location = new System.Drawing.Point(400, 39);
+            this.StepBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.StepBox.MaxLength = 50;
             this.StepBox.MouseState = MaterialSkin.MouseState.OUT;
             this.StepBox.Multiline = false;
             this.StepBox.Name = "StepBox";
-            this.StepBox.Size = new System.Drawing.Size(100, 50);
+            this.StepBox.Size = new System.Drawing.Size(133, 50);
             this.StepBox.TabIndex = 4;
             this.StepBox.Text = "";
             this.StepBox.TrailingIcon = null;
@@ -287,9 +302,10 @@ namespace DripSolve
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(172, 16);
+            this.label2.Location = new System.Drawing.Point(229, 20);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.Size = new System.Drawing.Size(95, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Bond Number";
             // 
@@ -300,12 +316,13 @@ namespace DripSolve
             this.BondBox.Depth = 0;
             this.BondBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.BondBox.LeadingIcon = null;
-            this.BondBox.Location = new System.Drawing.Point(163, 32);
+            this.BondBox.Location = new System.Drawing.Point(217, 39);
+            this.BondBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BondBox.MaxLength = 50;
             this.BondBox.MouseState = MaterialSkin.MouseState.OUT;
             this.BondBox.Multiline = false;
             this.BondBox.Name = "BondBox";
-            this.BondBox.Size = new System.Drawing.Size(100, 50);
+            this.BondBox.Size = new System.Drawing.Size(133, 50);
             this.BondBox.TabIndex = 2;
             this.BondBox.Text = "";
             this.BondBox.TrailingIcon = null;
@@ -314,9 +331,10 @@ namespace DripSolve
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 16);
+            this.label1.Location = new System.Drawing.Point(44, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(96, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Contact Angle";
             // 
@@ -329,12 +347,13 @@ namespace DripSolve
             this.ContactAngleBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ContactAngleBox.LeadingIcon = null;
             this.ContactAngleBox.LeaveOnEnterKey = true;
-            this.ContactAngleBox.Location = new System.Drawing.Point(22, 32);
+            this.ContactAngleBox.Location = new System.Drawing.Point(29, 39);
+            this.ContactAngleBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ContactAngleBox.MaxLength = 50;
             this.ContactAngleBox.MouseState = MaterialSkin.MouseState.OUT;
             this.ContactAngleBox.Multiline = false;
             this.ContactAngleBox.Name = "ContactAngleBox";
-            this.ContactAngleBox.Size = new System.Drawing.Size(100, 50);
+            this.ContactAngleBox.Size = new System.Drawing.Size(133, 50);
             this.ContactAngleBox.TabIndex = 0;
             this.ContactAngleBox.Text = "";
             this.ContactAngleBox.TrailingIcon = null;
@@ -347,8 +366,8 @@ namespace DripSolve
             this.SolveButton.Depth = 0;
             this.SolveButton.HighEmphasis = true;
             this.SolveButton.Icon = null;
-            this.SolveButton.Location = new System.Drawing.Point(127, 138);
-            this.SolveButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.SolveButton.Location = new System.Drawing.Point(169, 170);
+            this.SolveButton.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.SolveButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.SolveButton.Name = "SolveButton";
             this.SolveButton.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -367,7 +386,8 @@ namespace DripSolve
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(-1, -16);
+            this.chart1.Location = new System.Drawing.Point(-1, -20);
+            this.chart1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
             series1.ChartArea = "ChartArea1";
@@ -387,7 +407,7 @@ namespace DripSolve
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
             this.chart1.Series.Add(series3);
-            this.chart1.Size = new System.Drawing.Size(979, 611);
+            this.chart1.Size = new System.Drawing.Size(1305, 752);
             this.chart1.TabIndex = 7;
             this.chart1.Text = "chart1";
             this.chart1.Visible = false;
@@ -407,26 +427,29 @@ namespace DripSolve
             this.Results.Controls.Add(this.chart2);
             this.Results.ImageKey = "ResultsIcon.png";
             this.Results.Location = new System.Drawing.Point(4, 39);
+            this.Results.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Results.Name = "Results";
-            this.Results.Size = new System.Drawing.Size(1926, 970);
+            this.Results.Size = new System.Drawing.Size(1926, 976);
             this.Results.TabIndex = 2;
-            this.Results.Text = "Results";
+            this.Results.Text = "Sessile Results";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(518, 540);
+            this.label10.Location = new System.Drawing.Point(691, 665);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(104, 13);
+            this.label10.Size = new System.Drawing.Size(139, 17);
             this.label10.TabIndex = 10;
             this.label10.Text = "Real Volume (mm^3)";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(614, 418);
+            this.label9.Location = new System.Drawing.Point(819, 514);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.Size = new System.Drawing.Size(44, 17);
             this.label9.TabIndex = 9;
             this.label9.Text = "Angle";
             this.label9.Visible = false;
@@ -438,12 +461,13 @@ namespace DripSolve
             this.materialTextBox3.Depth = 0;
             this.materialTextBox3.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox3.LeadingIcon = null;
-            this.materialTextBox3.Location = new System.Drawing.Point(580, 434);
+            this.materialTextBox3.Location = new System.Drawing.Point(773, 534);
+            this.materialTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.materialTextBox3.MaxLength = 50;
             this.materialTextBox3.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBox3.Multiline = false;
             this.materialTextBox3.Name = "materialTextBox3";
-            this.materialTextBox3.Size = new System.Drawing.Size(100, 50);
+            this.materialTextBox3.Size = new System.Drawing.Size(133, 50);
             this.materialTextBox3.TabIndex = 8;
             this.materialTextBox3.Text = "";
             this.materialTextBox3.TrailingIcon = null;
@@ -456,12 +480,13 @@ namespace DripSolve
             this.materialTextBox2.Depth = 0;
             this.materialTextBox2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox2.LeadingIcon = null;
-            this.materialTextBox2.Location = new System.Drawing.Point(447, 556);
+            this.materialTextBox2.Location = new System.Drawing.Point(596, 684);
+            this.materialTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.materialTextBox2.MaxLength = 50;
             this.materialTextBox2.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBox2.Multiline = false;
             this.materialTextBox2.Name = "materialTextBox2";
-            this.materialTextBox2.Size = new System.Drawing.Size(233, 50);
+            this.materialTextBox2.Size = new System.Drawing.Size(311, 50);
             this.materialTextBox2.TabIndex = 7;
             this.materialTextBox2.Text = "";
             this.materialTextBox2.TrailingIcon = null;
@@ -474,8 +499,8 @@ namespace DripSolve
             this.materialButton2.Depth = 0;
             this.materialButton2.HighEmphasis = true;
             this.materialButton2.Icon = null;
-            this.materialButton2.Location = new System.Drawing.Point(507, 498);
-            this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton2.Location = new System.Drawing.Point(676, 613);
+            this.materialButton2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton2.Name = "materialButton2";
             this.materialButton2.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -491,9 +516,10 @@ namespace DripSolve
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(476, 418);
+            this.label8.Location = new System.Drawing.Point(635, 514);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.Size = new System.Drawing.Size(62, 17);
             this.label8.TabIndex = 5;
             this.label8.Text = "R0 (mm)";
             this.label8.Visible = false;
@@ -505,12 +531,13 @@ namespace DripSolve
             this.materialTextBox1.Depth = 0;
             this.materialTextBox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox1.LeadingIcon = null;
-            this.materialTextBox1.Location = new System.Drawing.Point(447, 434);
+            this.materialTextBox1.Location = new System.Drawing.Point(596, 534);
+            this.materialTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.materialTextBox1.MaxLength = 50;
             this.materialTextBox1.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBox1.Multiline = false;
             this.materialTextBox1.Name = "materialTextBox1";
-            this.materialTextBox1.Size = new System.Drawing.Size(100, 50);
+            this.materialTextBox1.Size = new System.Drawing.Size(133, 50);
             this.materialTextBox1.TabIndex = 4;
             this.materialTextBox1.Text = "";
             this.materialTextBox1.TrailingIcon = null;
@@ -523,8 +550,8 @@ namespace DripSolve
             this.materialButton1.Depth = 0;
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(890, 426);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.Location = new System.Drawing.Point(1187, 524);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
             this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -552,11 +579,12 @@ namespace DripSolve
             this.materialComboBox1.ItemHeight = 43;
             this.materialComboBox1.Items.AddRange(new object[] {
             "Sessile Drop"});
-            this.materialComboBox1.Location = new System.Drawing.Point(46, 426);
+            this.materialComboBox1.Location = new System.Drawing.Point(61, 524);
+            this.materialComboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.materialComboBox1.MaxDropDownItems = 4;
             this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
             this.materialComboBox1.Name = "materialComboBox1";
-            this.materialComboBox1.Size = new System.Drawing.Size(321, 49);
+            this.materialComboBox1.Size = new System.Drawing.Size(427, 49);
             this.materialComboBox1.StartIndex = 0;
             this.materialComboBox1.TabIndex = 2;
             this.materialComboBox1.SelectedIndexChanged += new System.EventHandler(this.materialComboBox1_SelectedIndexChanged);
@@ -567,7 +595,8 @@ namespace DripSolve
             this.chart2.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(15, 12);
+            this.chart2.Location = new System.Drawing.Point(20, 15);
+            this.chart2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
             series4.ChartArea = "ChartArea1";
@@ -575,7 +604,7 @@ namespace DripSolve
             series4.Legend = "Legend1";
             series4.Name = "Angle Vs Vstar";
             this.chart2.Series.Add(series4);
-            this.chart2.Size = new System.Drawing.Size(1033, 385);
+            this.chart2.Size = new System.Drawing.Size(1377, 474);
             this.chart2.TabIndex = 0;
             this.chart2.Text = "chart2";
             // 
@@ -587,15 +616,26 @@ namespace DripSolve
             this.imageList1.Images.SetKeyName(1, "SettingsIcon.png");
             this.imageList1.Images.SetKeyName(2, "ResultsIcon.png");
             // 
+            // plateflow
+            // 
+            this.plateflow.Location = new System.Drawing.Point(4, 39);
+            this.plateflow.Name = "plateflow";
+            this.plateflow.Size = new System.Drawing.Size(1926, 976);
+            this.plateflow.TabIndex = 3;
+            this.plateflow.Text = "Plate Flow";
+            this.plateflow.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1940, 1080);
+            this.ClientSize = new System.Drawing.Size(1942, 1102);
             this.Controls.Add(this.Tabs);
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.Tabs;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
+            this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DripSolve";
             this.Tabs.ResumeLayout(false);
@@ -647,6 +687,7 @@ namespace DripSolve
         private System.Windows.Forms.Label label9;
         private MaterialSkin.Controls.MaterialTextBox materialTextBox3;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TabPage plateflow;
     }
 }
 
