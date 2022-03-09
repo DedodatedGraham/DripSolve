@@ -64,6 +64,9 @@ namespace DripSolve
         private List<double> d2udy { get; set; }
         public List<double> solveU { get; set; }
         private List<double> a0 { get; set; }
+
+        public double[,] matrix { get; set; }
+
         #endregion
         public PlateFlow()
         {
@@ -255,30 +258,84 @@ namespace DripSolve
             {
                 d2udy.Add(B/mu(y[i]));
             }
-            //next the second oder matrix
-            double[,] matrix = new double[d2udy.Count, d2udy.Count];
+            //next the second order matrix
+            //will be square of d2udy length to ensure it can be inverted
+            matrix = new double[d2udy.Count, d2udy.Count+1];
             for(int i = 0; i < d2udy.Count; i++)
             {
-                for(int j = 0; j < d2udy.Count; j++)
+                for(int q = 0; q < d2udy.Count+1; q++)
                 {
-                    if( j == i)
+                    if(q == i)
                     {
-                        matrix[i,j] = 2 * (1 / Math.Pow(dy, 2));
+                        matrix[i,q] = 2 * (1 / Math.Pow(dy, 2));
                     }
-                    else if(j == i-1 || j == i + 1)
+                    else if (q == d2udy.Count)
                     {
-                        matrix[i,j] = (-1 * (1/Math.Pow(dy,2)));
+                        //here we add in d2udy
+                        matrix[i, q] = d2udy[i];
+                    }
+                    else if(q == i-1 || q == i + 1)
+                    {
+                        matrix[i,q] = (-1 * (1/Math.Pow(dy,2)));
                     }
                     else
                     {
-                        matrix[i,j] = 0;
+                        matrix[i,q] = 0;
                     }
+                    
                 }
             }
             //Then invert matrix
-            
-            
+            //choosing to do gauss-jordan for inverting this matrix system
+            int n = d2udy.Count;
+            int k = 0;
+            int c = 0;
+            int j = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (matrix[i, i] == 0)
+                {
+                    c = 1;
+                    while ((i + c) < n && matrix[i + c, i] == 0)
+                        c++;
+                    if ((i + c) == n)
+                    {
+                        break;
+                    }
+                    for (j = i, k = 0; k <= n; k++)
+                    {
+                        double temp = matrix[j, k];
+                        matrix[j, k] = matrix[j + c, k];
+                        matrix[j + c, k] = temp;
+                    }
+                }
 
+                for (j = 0; j < n; j++)
+                {
+                    if (i != j)
+                    {
+                        double p = matrix[j, i] / matrix[i, i];
+
+                        for (k = 0; k <= n; k++)
+                        {
+                            matrix[j, k] = matrix[j, k] - (matrix[i, k]) * p;
+                        }
+                            
+                    }
+                }
+            }
+
+            //then we will take the matrix and put it into the solved U's
+            solveU = new List<double>();
+            a0 = new List<double>();
+            solveU.Add(u0);
+            for(int i = 0; i < d2udy.Count; i++)
+            {
+                double temp = (matrix[i, 118] / matrix[i, i]) * -1;
+                solveU.Add(temp);
+            }
+            solveU.Add(U);
+            a0.Add((solveU[1]-solveU[0])/dy);
 
         }
         #endregion
