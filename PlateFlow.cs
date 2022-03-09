@@ -41,7 +41,7 @@ namespace DripSolve
              //vars layout:
              //vars[0] = y
              //vars[1] = c1
-             return ((B / (mu0 + A * vars[0])) * vars[0] + vars[1]);
+             return (0);
              
          };
 
@@ -50,7 +50,7 @@ namespace DripSolve
              //vars layout:
              //vars[0] = y
              //vars[1] = c1
-             return ( (B / (mu0 + A * vars[0])) * (Math.Pow(vars[0],2)/2) + vars[1] * vars[0]);
+             return (0);
          };
         #endregion
 
@@ -72,7 +72,7 @@ namespace DripSolve
         {
             //Base Constructor Creates Direct Solution
             //first find what c1 is, c2 is 0
-            c1 = (U / L) - (B / mu(L)) * (L/2);
+            c1 = 0;
             method = 0;
 
         }
