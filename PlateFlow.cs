@@ -41,7 +41,7 @@ namespace DripSolve
              //vars layout:
              //vars[0] = y
              //vars[1] = c1
-             return (0);
+             return ((B*Math.Log(Math.Abs(A*vars[0]+mu0)))/A + vars[1]);
              
          };
 
@@ -50,7 +50,8 @@ namespace DripSolve
              //vars layout:
              //vars[0] = y
              //vars[1] = c1
-             return (0);
+             //vars[2] = c2
+             return ((B * (A * vars[0] + mu0) * (Math.Log(Math.Abs(A * vars[0] + mu0)) - 1)) / (Math.Pow(A, 2))) + vars[1] * vars[0] + vars[2];
          };
         #endregion
 
@@ -72,7 +73,9 @@ namespace DripSolve
         {
             //Base Constructor Creates Direct Solution
             //first find what c1 is, c2 is 0
-            c1 = 0;
+            c2 = -1* ((B * mu0 * (Math.Log(Math.Abs(mu0))-1))/(Math.Pow(A,2)));
+            c1 = (U/L) - (c2/L) - ((B*(A*L+mu0)*(Math.Log(Math.Abs(A*L+mu0)) - 1))/(Math.Pow(A,2) * L));
+            
             method = 0;
 
         }
@@ -154,6 +157,7 @@ namespace DripSolve
                     List<double> a = new List<double>();
                     a.Add(grid[i]);
                     a.Add(c1);
+                    a.Add(c2);
                     solveU.Add(Eu(a));
                 }
                 List<double> b = new List<double>();

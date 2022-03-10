@@ -28,6 +28,8 @@ namespace DripSolve
         public List<double> contactAngles;
         public List<double> bonds;
 
+        public int N;
+
         public List<List<double>> plots;
 
         readonly MaterialSkin.MaterialSkinManager materialSkinManager;
@@ -69,8 +71,7 @@ namespace DripSolve
 
 
 
-        private void
-            StepBox_TextChanged(object sender, EventArgs e)
+        private void StepBox_TextChanged(object sender, EventArgs e)
         {
             if (!(StepBox.Text is null) && StepBox.Text.Length != 0)
             {
@@ -318,5 +319,9 @@ namespace DripSolve
             materialTextBox2.Visible = true;
         }
 
+        private void materialTextBox4_TextChanged(object sender, EventArgs e)
+        { 
+            N = int.Parse(materialTextBox4.Text);
+        }
     }
 }

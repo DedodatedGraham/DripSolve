@@ -30,7 +30,7 @@ namespace DripSolve
             //the direct method can be used as a direct check for errors when given the y values of the given method  
 
             PlateFlow b = new PlateFlow();
-            b.Solve(a1.y);
+            b.Solve(a3.y);
             List<double> error = b.getError(a1);
             for(int i = 0; i < error.Count; i++)
             {
