@@ -30,14 +30,14 @@ namespace DripSolve
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Tabs = new MaterialSkin.Controls.MaterialTabControl();
             this.SettingPage = new System.Windows.Forms.TabPage();
@@ -72,10 +72,11 @@ namespace DripSolve
             this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.plateflow = new System.Windows.Forms.TabPage();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.PlatePicker = new MaterialSkin.Controls.MaterialComboBox();
-            this.materialTextBox4 = new MaterialSkin.Controls.MaterialTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialTextBox4 = new MaterialSkin.Controls.MaterialTextBox();
+            this.PlatePicker = new MaterialSkin.Controls.MaterialComboBox();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.Res2 = new System.Windows.Forms.TabPage();
             this.Tabs.SuspendLayout();
             this.SettingPage.SuspendLayout();
             this.SessileDropPage.SuspendLayout();
@@ -91,6 +92,7 @@ namespace DripSolve
             this.Tabs.Controls.Add(this.SessileDropPage);
             this.Tabs.Controls.Add(this.Results);
             this.Tabs.Controls.Add(this.plateflow);
+            this.Tabs.Controls.Add(this.Res2);
             this.Tabs.Depth = 0;
             this.Tabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tabs.ImageList = this.imageList1;
@@ -386,31 +388,31 @@ namespace DripSolve
             // 
             // chart1
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chart1.Legends.Add(legend5);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(-1, -20);
             this.chart1.Margin = new System.Windows.Forms.Padding(4);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Legend = "Legend1";
-            series9.Name = "Surface";
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series10.Legend = "Legend1";
-            series10.Name = "SessileShape";
-            series11.ChartArea = "ChartArea1";
-            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series11.IsVisibleInLegend = false;
-            series11.Legend = "Legend1";
-            series11.Name = "Lines";
-            series11.YValuesPerPoint = 2;
-            this.chart1.Series.Add(series9);
-            this.chart1.Series.Add(series10);
-            this.chart1.Series.Add(series11);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Surface";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "SessileShape";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Lines";
+            series3.YValuesPerPoint = 2;
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(1305, 752);
             this.chart1.TabIndex = 7;
             this.chart1.Text = "chart1";
@@ -595,68 +597,47 @@ namespace DripSolve
             // 
             // chart2
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chart2.Legends.Add(legend6);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
             this.chart2.Location = new System.Drawing.Point(20, 15);
             this.chart2.Margin = new System.Windows.Forms.Padding(4);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series12.ChartArea = "ChartArea1";
-            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series12.Legend = "Legend1";
-            series12.Name = "Angle Vs Vstar";
-            this.chart2.Series.Add(series12);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "Angle Vs Vstar";
+            this.chart2.Series.Add(series4);
             this.chart2.Size = new System.Drawing.Size(1377, 474);
             this.chart2.TabIndex = 0;
             this.chart2.Text = "chart2";
             // 
             // plateflow
             // 
+            this.plateflow.BackColor = System.Drawing.Color.DimGray;
             this.plateflow.Controls.Add(this.materialLabel1);
             this.plateflow.Controls.Add(this.materialTextBox4);
             this.plateflow.Controls.Add(this.PlatePicker);
+            this.plateflow.ImageKey = "PlateFlow.png";
             this.plateflow.Location = new System.Drawing.Point(4, 39);
             this.plateflow.Name = "plateflow";
             this.plateflow.Size = new System.Drawing.Size(1926, 976);
             this.plateflow.TabIndex = 3;
             this.plateflow.Text = "Plate Flow";
-            this.plateflow.UseVisualStyleBackColor = true;
             // 
-            // imageList1
+            // materialLabel1
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.DimGray;
-            this.imageList1.Images.SetKeyName(0, "sessileDrop.png");
-            this.imageList1.Images.SetKeyName(1, "SettingsIcon.png");
-            this.imageList1.Images.SetKeyName(2, "ResultsIcon.png");
-            // 
-            // PlatePicker
-            // 
-            this.PlatePicker.AutoResize = false;
-            this.PlatePicker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.PlatePicker.Depth = 0;
-            this.PlatePicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.PlatePicker.DropDownHeight = 174;
-            this.PlatePicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PlatePicker.DropDownWidth = 121;
-            this.PlatePicker.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.PlatePicker.ForeColor = System.Drawing.Color.LightGray;
-            this.PlatePicker.FormattingEnabled = true;
-            this.PlatePicker.IntegralHeight = false;
-            this.PlatePicker.ItemHeight = 43;
-            this.PlatePicker.Items.AddRange(new object[] {
-            "Bisection Method",
-            "Secant Method",
-            "Direct Method"});
-            this.PlatePicker.Location = new System.Drawing.Point(20, 20);
-            this.PlatePicker.MaxDropDownItems = 4;
-            this.PlatePicker.MouseState = MaterialSkin.MouseState.OUT;
-            this.PlatePicker.Name = "PlatePicker";
-            this.PlatePicker.Size = new System.Drawing.Size(315, 49);
-            this.PlatePicker.StartIndex = 0;
-            this.PlatePicker.TabIndex = 0;
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(19, 101);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(101, 19);
+            this.materialLabel1.TabIndex = 2;
+            this.materialLabel1.Text = "Grid Points(N)";
             // 
             // materialTextBox4
             // 
@@ -676,17 +657,49 @@ namespace DripSolve
             this.materialTextBox4.TrailingIcon = null;
             this.materialTextBox4.TextChanged += new System.EventHandler(this.materialTextBox4_TextChanged);
             // 
-            // materialLabel1
+            // PlatePicker
             // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(19, 101);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(101, 19);
-            this.materialLabel1.TabIndex = 2;
-            this.materialLabel1.Text = "Grid Points(N)";
+            this.PlatePicker.AutoResize = false;
+            this.PlatePicker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.PlatePicker.Depth = 0;
+            this.PlatePicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.PlatePicker.DropDownHeight = 174;
+            this.PlatePicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PlatePicker.DropDownWidth = 121;
+            this.PlatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.PlatePicker.ForeColor = System.Drawing.Color.LightGray;
+            this.PlatePicker.FormattingEnabled = true;
+            this.PlatePicker.IntegralHeight = false;
+            this.PlatePicker.ItemHeight = 43;
+            this.PlatePicker.Items.AddRange(new object[] {
+            "Bisection Method",
+            "Secant Method",
+            "Direct Method"});
+            this.PlatePicker.Location = new System.Drawing.Point(20, 20);
+            this.PlatePicker.MaxDropDownItems = 4;
+            this.PlatePicker.MouseState = MaterialSkin.MouseState.OUT;
+            this.PlatePicker.Name = "PlatePicker";
+            this.PlatePicker.Size = new System.Drawing.Size(315, 49);
+            this.PlatePicker.StartIndex = 0;
+            this.PlatePicker.TabIndex = 0;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.DimGray;
+            this.imageList1.Images.SetKeyName(0, "sessileDrop.png");
+            this.imageList1.Images.SetKeyName(1, "SettingsIcon.png");
+            this.imageList1.Images.SetKeyName(2, "ResultsIcon.png");
+            this.imageList1.Images.SetKeyName(3, "PlateFlow.png");
+            // 
+            // Res2
+            // 
+            this.Res2.Location = new System.Drawing.Point(4, 39);
+            this.Res2.Name = "Res2";
+            this.Res2.Size = new System.Drawing.Size(1926, 976);
+            this.Res2.TabIndex = 4;
+            this.Res2.Text = "Plate Results";
+            this.Res2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -756,6 +769,7 @@ namespace DripSolve
         private MaterialSkin.Controls.MaterialComboBox PlatePicker;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialTextBox materialTextBox4;
+        private System.Windows.Forms.TabPage Res2;
     }
 }
 
