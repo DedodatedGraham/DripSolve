@@ -59,6 +59,9 @@ namespace DripSolve
             chart1.ChartAreas[0].AxisX.Minimum = -1.0;
             chart1.ChartAreas[0].AxisX.Maximum =  1.0;
 
+
+            E2dy = new List<double>();
+            E2Error = new List<double>();
         }
         private void ContactAngleBox_TextChanged(object sender, EventArgs e)
         {
@@ -430,6 +433,48 @@ namespace DripSolve
             temp = Math.Sqrt(temp);
             temp = temp / (PlateError.Count - 1);
             E2Error.Add(temp);
+        }
+
+        private void materialButton6_Click(object sender, EventArgs e)
+        {
+            if(E2Error.Count > 0)
+            {
+                List<List<double>> sorted = Sort(E2dy,E2Error);
+                List<double> tempdy = sorted[0];
+                List<double> tempError = sorted[1];
+                E2dy = new List<double>();
+                E2Error = new List<double>();
+                for(int i = 0; i < tempdy.Count; i++)
+                {
+                    E2dy.Add(Math.Log10(tempdy[i]));
+                    E2Error.Add(Math.Log10(tempError[i]));
+                }
+
+                
+
+
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Log(dy)",typeof(double));
+                dt.Columns.Add("Log(E2)",typeof(double));
+
+                for(int i = 0; i < E2dy.Count; i++)
+                {
+                    dt.Rows.Add(E2dy[i],E2Error[i]);
+                }
+
+
+
+                chart4.DataSource = dt;
+
+                chart4.Series["E2 vs dy"].XValueMember = "Log(dy)";
+                chart4.Series["E2 vs dy"].YValueMembers = "Log(E2)";
+
+                chart4.Visible = true;
+
+
+
+
+            }
         }
     }
 }
