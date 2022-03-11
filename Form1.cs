@@ -22,14 +22,21 @@ namespace DripSolve
         public double ContactAngle;
         public double Step;
         public double dlessvol;
-        #endregion
-
         public List<double> dimvolumes;
         public List<double> contactAngles;
         public List<double> bonds;
 
-        public int N;
+        #endregion
 
+        #region Plateflow Properties
+        public int N;
+        public PlateFlow RealPlate;
+        public PlateFlow testPlate;
+        public List<double> PlateError;
+        public List<double> E2dy;
+        public List<double> E2Error;
+
+        #endregion
         public List<List<double>> plots;
 
         readonly MaterialSkin.MaterialSkinManager materialSkinManager;
@@ -321,7 +328,108 @@ namespace DripSolve
 
         private void materialTextBox4_TextChanged(object sender, EventArgs e)
         { 
-            N = int.Parse(materialTextBox4.Text);
+            if(materialTextBox4.Text != "")
+            {
+                N = int.Parse(materialTextBox4.Text);
+            }
+            
+        }
+
+        private void materialButton3_Click(object sender, EventArgs e)
+        {
+            RealPlate = new PlateFlow();
+            if (N != 0)
+            {
+                switch (PlatePicker.Text)
+                {
+                    case ("Bisection Method"):
+                        testPlate = new PlateFlow(1, N);
+                        testPlate.Solve();
+                        RealPlate.Solve(testPlate.y);
+                        PlateError = RealPlate.getError(testPlate);
+                        break;
+                    case ("Secant Method"):
+                        testPlate = new PlateFlow(2, N);
+                        testPlate.Solve();
+                        RealPlate.Solve(testPlate.y);
+                        PlateError = RealPlate.getError(testPlate);
+                        break;
+                    case ("Direct Method"):
+                        testPlate = new PlateFlow(3, N);
+                        testPlate.Solve();
+                        RealPlate.Solve(testPlate.y);
+                        PlateError = RealPlate.getError(testPlate);
+                        break;
+                }
+                PlatePicker.Visible = false;
+                materialButton3.Visible = false;
+                materialLabel1.Visible = false;
+                materialTextBox4.Visible = false;
+                materialButton4.Visible = true;
+                materialButton5.Visible = true;
+
+                DataTable dt = new DataTable();
+                dt.Columns.Add("SurfaceX", typeof(double));
+                dt.Columns.Add("SurfaceYB", typeof(double));
+                dt.Columns.Add("SurfaceYT", typeof(double));
+                dt.Columns.Add("Ygrid", typeof(double));
+                dt.Columns.Add("UExact", typeof(double));
+                dt.Columns.Add("UTest", typeof(double));
+
+                double max = RealPlate.solveU.Max();
+                double min =
+                N = testPlate.y.Count;
+                double dxSurface = max / N;
+                for (int i = 0; i < N; i++)
+                {
+                    //adds the surfaces, and exact and real plots into the 
+                    dt.Rows.Add(i * dxSurface, 0, 2, testPlate.y[i], RealPlate.solveU[i], testPlate.solveU[i]);
+                }
+                chart3.DataSource = dt;
+
+                chart3.Series["Top Plate"].XValueMember = "SurfaceX";
+                chart3.Series["Top Plate"].YValueMembers = "SurfaceYT";
+
+                chart3.Series["Bottom Plate"].XValueMember = "SurfaceX";
+                chart3.Series["Bottom Plate"].YValueMembers = "SurfaceYB";
+
+                chart3.Series["Exact Solution"].XValueMember = "UExact";
+                chart3.Series["Exact Solution"].YValueMembers = "Ygrid";
+
+                chart3.Series["Test Solution"].XValueMember = "UTest";
+                chart3.Series["Test Solution"].YValueMembers = "Ygrid";
+
+                chart3.Visible = true;
+
+                chart3.ChartAreas[0].AxisY.Maximum = 2.5;
+                chart3.ChartAreas[0].AxisY.Minimum = -0.5;
+                chart3.ChartAreas[0].AxisX.Maximum = max + 10;
+                chart3.ChartAreas[0].AxisX.Minimum = 0;
+            }
+        }
+
+        private void materialButton4_Click(object sender, EventArgs e)
+        {
+            PlatePicker.Visible = true;
+            materialButton3.Visible = true;
+            materialLabel1.Visible = true;
+            materialTextBox4.Visible = true;
+            chart3.Visible = false;
+            materialTextBox4.Text = "";
+            materialButton4.Visible = false;
+        }
+
+        private void materialButton5_Click(object sender, EventArgs e)
+        {
+            double temp = 0;
+            E2dy.Add(testPlate.dy);
+            for (int i = 0; i < PlateError.Count; i++)
+            {
+                temp = temp + (Math.Pow(PlateError[i], 2));
+            }
+            temp = Math.Sqrt(temp);
+            temp = temp / (PlateError.Count - 1);
+            E2Error.Add(temp);
         }
     }
 }

@@ -335,7 +335,7 @@ namespace DripSolve
             solveU.Add(u0);
             for(int i = 0; i < d2udy.Count; i++)
             {
-                double temp = (matrix[i, 118] / matrix[i, i]) * -1;
+                double temp = (matrix[i, (int)Math.Ceiling(Math.Sqrt(matrix.Length)) -1]  / matrix[i, i]) * -1;
                 solveU.Add(temp);
             }
             solveU.Add(U);
