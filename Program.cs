@@ -16,6 +16,7 @@ namespace DripSolve
         static void Main()
         {
             Bugers a = new Bugers(0.01);
+            a.Solve(2);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
