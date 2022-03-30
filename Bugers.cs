@@ -143,16 +143,177 @@ namespace DripSolve
             {
                 List<double> tsol = new List<double>();
                 List<double> tflux = new List<double>();
+                if (t == 0)
+                {
+                    //first time step 
+                    //makes guesses from IVP
+                    //u(x,t=0) = u0(x) = -sin(pi*x)
+                    for (int x = 0; x < space.Count; x++)
+                    {
+                        //Gets the inital wave u0 = -sin(pi*x)
+                        tsol.Add(u0x(space[x]));
+                    }
+                }
+                else
+                {
+                    for (int x = 0; x < space.Count; x++)
+                    {
+                        if(x != 0 && x != space.Count - 1)
+                        {
+                            //Will get the U(j,n+1)
+                            double fpos = (flux[t - 1][x] + flux[t - 1][x + 1]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x + 1] - solution[t - 1][x]);//F(j+1/2,n)
+                            double fmin = (flux[t - 1][x - 1] + flux[t - 1][x]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x] - solution[t - 1][x - 1]);//F(j-1/2,n)
+                            tsol.Add((dt / dx) * (fpos - fmin) + (1 / 2) * (solution[t - 1][x + 1] + solution[t - 1][x - 1]));
+                        }
+                        else if(x == 0)
+                        {
+                            //Will get the U(0,n+1)
+                            double fpos = (flux[t - 1][x] + flux[t - 1][x + 1]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x + 1] - solution[t - 1][x]);//F(j+1/2,n)
+                            double fmin = (flux[t - 1][space.Count - 1] + flux[t - 1][x]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x] - solution[t - 1][space.Count - 1]);//F(j-1/2,n)
+                            tsol.Add((dt / dx) * (fpos - fmin) + (1 / 2) * (solution[t - 1][x + 1] + solution[t - 1][space.Count - 1]));
+                        }
+                        else
+                        {
+                            //Will get the U(X,n+1)
+                            double fpos = (flux[t - 1][x] + flux[t - 1][0]) / 2 - (dx / (2 * dt)) * (solution[t - 1][0] - solution[t - 1][x]);//F(j+1/2,n)
+                            double fmin = (flux[t - 1][x - 1] + flux[t - 1][x]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x] - solution[t - 1][x - 1]);//F(j-1/2,n)
+                            tsol.Add((dt / dx) * (fpos - fmin) + (1 / 2) * (solution[t - 1][0] + solution[t - 1][x - 1]));
+                        }
+                    }
+                }
+                solution.Add(tsol);
+                //calulates flux per timestep, it is needed to find solution at next time step
                 for (int x = 0; x < space.Count; x++)
                 {
-                                  
-                }
+                    if (x != 0 && x != space.Count - 1)
+                    {
+                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][x + 1] - solution[t][x - 1]) / (2 * dx));
+                    }
+                    else if (x == 0)
+                    {
+                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][x + 1] - solution[t][space.Count - 1]) / (2 * dx));
+                    }
+                    else
+                    {
+                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][0] - solution[t][x - 1]) / (2 * dx));
+                    }
 
+                }
+                flux.Add(tflux);
             }
         }
         public void SolveKT()
         {
+            double v = 0;
+            for(int t = 0; t < time.Count; t++)
+            {
+                List<double> tsol = new List<double>();
+                List<double> tflux = new List<double>();
+                if (t == 0)
+                {
+                    //first time step 
+                    //makes guesses from IVP
+                    //u(x,t=0) = u0(x) = -sin(pi*x)
+                    for (int x = 0; x < space.Count; x++)
+                    {
+                        //Gets the inital wave u0 = -sin(pi*x)
+                        tsol.Add(u0x(space[x]));
+                    }
+                }
+                else
+                {
+                    for (int x = 0; x < space.Count; x++)
+                    {
+                        double apos = 0;
+                        double aneg = 0;
+                        double Fpos = 0;
+                        double Fneg = 0;
+                        if(x == 0)
+                        {
+                            if (solution[t - 1][x + 1] > solution[t - 1][x])
+                            {
+                                apos = solution[t - 1][x + 1];
+                            }
+                            else
+                            {
+                                apos = solution[t - 1][x];
+                            }
+                            if (solution[t - 1][space.Count - 1] > solution[t - 1][x])
+                            {
+                                aneg = solution[t - 1][space.Count - 1];
+                            }
+                            else
+                            {
+                                aneg = solution[t - 1][x];
+                            }
+                            Fpos = ((flux[t - 1][x] + flux[t - 1][x + 1]) / 2) - (apos / 2) * (solution[t - 1][x + 1] - solution[t - 1][x]);
+                            Fneg = ((flux[t - 1][space.Count - 1] + flux[t - 1][x]) / 2) - (aneg / 2) * (solution[t - 1][x] - solution[t - 1][space.Count - 1]);
+                        }
+                        else if(x == space.Count - 1)
+                        {
+                            if (solution[t - 1][0] > solution[t - 1][x])
+                            {
+                                apos = solution[t - 1][0];
+                            }
+                            else
+                            {
+                                apos = solution[t - 1][x];
+                            }
+                            if (solution[t - 1][x - 1] > solution[t - 1][x])
+                            {
+                                aneg = solution[t - 1][x - 1];
+                            }
+                            else
+                            {
+                                aneg = solution[t - 1][x];
+                            }
+                            Fpos = ((flux[t - 1][x] + flux[t - 1][0]) / 2) - (apos / 2) * (solution[t - 1][0] - solution[t - 1][x]);
+                            Fneg = ((flux[t - 1][x - 1] + flux[t - 1][x]) / 2) - (aneg / 2) * (solution[t - 1][x] - solution[t - 1][x - 1]);
+                        }
+                        else
+                        {
+                            if (solution[t - 1][x + 1] > solution[t - 1][x])
+                            {
+                                apos = solution[t - 1][x + 1];
+                            }
+                            else
+                            {
+                                apos = solution[t - 1][x];
+                            }
+                            if (solution[t - 1][x - 1] > solution[t - 1][x])
+                            {
+                                aneg = solution[t - 1][x - 1];
+                            }
+                            else
+                            {
+                                aneg = solution[t - 1][x];
+                            }
+                            Fpos = ((flux[t - 1][x] + flux[t - 1][x + 1]) / 2) - (apos / 2) * (solution[t - 1][x + 1] - solution[t - 1][x]);
+                            Fneg = ((flux[t - 1][x - 1] + flux[t - 1][x]) / 2) - (aneg / 2) * (solution[t - 1][x] - solution[t - 1][x - 1]);
+                        }
+                        
+                        tsol.Add(-1 * (dt/dx) * (Fpos - Fneg) + solution[t - 1][x]);
+                    }
+                }
+                solution.Add(tsol);
+                for (int x = 0; x < space.Count; x++)
+                {
+                    if (x != 0 && x != space.Count - 1)
+                    {
+                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][x + 1] - solution[t][x - 1]) / (2 * dx));
+                    }
+                    else if (x == 0)
+                    {
+                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][x + 1] - solution[t][space.Count - 1]) / (2 * dx));
+                    }
+                    else
+                    {
+                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][0] - solution[t][x - 1]) / (2 * dx));
+                    }
 
+                }
+                flux.Add(tflux);
+            }
         }
     }
 }
