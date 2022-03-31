@@ -14,6 +14,7 @@ namespace DripSolve
         public List<double> space { get; set; }
         public List<List<double>> solution { get; set; }
         public List<List<double>> flux { get; set; }
+        public string stability { get; set; }
 
         #endregion
 
@@ -38,9 +39,9 @@ namespace DripSolve
             solution = new List<List<double>>();
             flux = new List<List<double>>();
             //creates grid for both space and time dimensions
-            for(double i = xMin; i < xMax + deltax; i = i + dx)
+            for(double i = xMin; i < xMax + deltax; i = i + deltax)
             {
-                space.Add(Math.Round(i, 6));
+                space.Add(i);
             }
             for (double j = 0; j <= 0.5; j = j + 0.1)
             {
@@ -60,79 +61,102 @@ namespace DripSolve
             {
                 case 1:
                     SolveCD(0.0);
+                    if(dt/dx <= 1)
+                    {
+                        stability = "Stable";
+                    }
+                    else
+                    {
+                        stability = "Unstable";
+                    }
                     break;
                 case 2:
                     SolveLF(0.0);
+                    
                     break;
                 case 3:
                     SolveKT(0.0);
                     break;
                 case 4:
                     SolveCD(0.01/Math.PI);
+                    if (dt / dx <= 1)
+                    {
+                        stability = "Stable";
+                    }
+                    else
+                    {
+                        stability = "Unstable";
+                    }
                     break;
                 case 5:
                     SolveLF(0.01 / Math.PI);
                     break;
             }
-
         }
 
         public void SolveCD(double v)
-        {
-            for(int t = 0; t < time.Count; t++)
+        { 
+            for (int t = 0; t < time.Count; t++)
             {
                 List<double> tsol = new List<double>();
                 List<double> tflux = new List<double>();
-                if (t == 0)
-                {
-                    //first time step 
-                    //makes guesses from IVP
-                    //u(x,t=0) = u0(x) = -sin(pi*x)
-                    for(int x = 0; x < space.Count; x++)
-                    {
-                        //Gets the inital wave u0 = -sin(pi*x)
-                        tsol.Add(u0x(space[x]));
-                        
-                    }
-                }
-                else
-                {
-                    //the rest of the timesteps use the last timesteps info to infer
-                    for (int x = 0; x < space.Count; x++)
-                    {
-                        //gets the next time step solution from previous values and flux movement
-                        //uses perodic bc's so can grab values from 'other side'
-                        if (x != 0 && x != space.Count - 1)
-                        {
-                            tsol.Add((dt / dx) * ((flux[t - 1][x] + flux[t - 1][x + 1]) / 2 - (flux[t -1][x - 1] + flux[t - 1][x]) / 2) + solution[t - 1][x]);
-                        }
-                        else if (x == 0)
-                        {
-                            tsol.Add((dt / dx) * ((flux[t - 1][x] + flux[t - 1][x + 1]) / 2 - (flux[t - 1][space.Count - 1] + flux[t - 1][x]) / 2) + solution[t - 1][x]);
-                        }
-                        else
-                        {
-                            tsol.Add((dt / dx) * ((flux[t - 1][x] + flux[t - 1][0]) / 2 - (flux[t - 1][x - 1] + flux[t - 1][x]) / 2) + solution[t - 1][x]);
-                        }
-                    }
-                }
-                solution.Add(tsol);
-                //calulates flux per timestep, it is needed to find solution at next time step
+                //gets the U value at timestep t and position j
                 for (int x = 0; x < space.Count; x++)
                 {
-                    if(x != 0 && x != space.Count - 1)
+                    if(t == 0)
                     {
-                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][x + 1] - solution[t][x - 1]) / (2 * dx));
-                    }
-                    else if(x == 0)
-                    {
-                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][x + 1] - solution[t][space.Count - 1]) / (2 * dx));
+                        double temp = u0x(space[x]);
+                        tsol.Add(temp);
                     }
                     else
                     {
-                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][0] - solution[t][x - 1]) / (2 * dx));
+                        if(x == 0)
+                        {
+                            double fpos = ((flux[t - 1][x] + flux[t - 1][space.Count - 1]) / 2);
+                            double fneg = ((flux[t - 1][x + 1] + flux[t - 1][x]) / 2);
+                            double temp = (-1 * dt / dx) * (fpos - fneg) + solution[t - 1][x];
+                            tsol.Add(temp);
+                        }
+                        else if(x == space.Count - 1)
+                        {
+                            double fpos = ((flux[t - 1][x] + flux[t - 1][x - 1]) / 2);
+                            double fneg = ((flux[t - 1][0] + flux[t - 1][x]) / 2);
+                            double temp = (-1 * dt / dx) * (fpos - fneg) + solution[t - 1][x];
+                            tsol.Add(temp);
+                        }
+                        else
+                        {
+                            double fpos = ((flux[t - 1][x] + flux[t - 1][x - 1]) / 2);
+                            double fneg = ((flux[t - 1][x + 1] + flux[t - 1][x]) / 2);
+                            double temp = (-1 * dt / dx) * (fpos - fneg) + solution[t - 1][x];
+                            tsol.Add(temp);
+                        }
+                        
                     }
-                    
+                }
+                solution.Add(tsol);
+
+                //Next gets flux for current time step
+                for(int x = 0; x < space.Count; x++)
+                {
+                    if(x == 0)
+                    {
+                        double left = Math.Pow(Math.Abs(solution[t][x]), 2);
+                        double right = (v / (2 * dx)) * (solution[t][x + 1] - solution[t][space.Count - 1]);
+                        tflux.Add(left - right);
+                    }
+                    else if(x == space.Count - 1)
+                    {
+                        double left = Math.Pow(Math.Abs(solution[t][x]), 2);
+                        double right = (v / (2 * dx)) * (solution[t][0] - solution[t][x - 1]);
+                        tflux.Add(left - right);
+                    }
+                    else
+                    {
+                        double left = Math.Pow(Math.Abs(solution[t][x]), 2);
+                        double right = (v / (2 * dx)) * (solution[t][x + 1] - solution[t][x - 1]);
+                        tflux.Add(left - right);
+                    }
                 }
                 flux.Add(tflux);
             }
@@ -309,7 +333,6 @@ namespace DripSolve
                     {
                         tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][0] - solution[t][x - 1]) / (2 * dx));
                     }
-
                 }
                 flux.Add(tflux);
             }
