@@ -489,7 +489,40 @@ namespace DripSolve
             berg = new Bugers(dx);
             berg.Solve(materialComboBox2.SelectedIndex + 1);
             //Next now that it is solved we can display the solution on the results tab
+            DataTable dt = new DataTable();
+            dt.Columns.Add("X",typeof(double));
+            dt.Columns.Add("U-0", typeof(double));
+            dt.Columns.Add("U-1", typeof(double));
+            dt.Columns.Add("U-2", typeof(double));
+            dt.Columns.Add("U-3", typeof(double));
+            dt.Columns.Add("U-4", typeof(double));
+            dt.Columns.Add("U-5", typeof(double));
 
+            for(int i = 0; i < berg.solution[0].Count; i++)
+            {
+                dt.Rows.Add(berg.space[i], berg.solution[0][i], berg.solution[1][i], berg.solution[2][i], berg.solution[3][i], berg.solution[4][i], berg.solution[5][i]);
+            }
+
+            chart5.DataSource = dt;
+
+            chart5.Series["Series1"].XValueMember = "X";
+            chart5.Series["Series1"].YValueMembers = "U-0";
+
+            chart5.Series["Series2"].XValueMember = "X";
+            chart5.Series["Series2"].YValueMembers = "U-1";
+
+            chart5.Series["Series3"].XValueMember = "X";
+            chart5.Series["Series3"].YValueMembers = "U-2";
+
+            chart5.Series["Series4"].XValueMember = "X";
+            chart5.Series["Series4"].YValueMembers = "U-3";
+
+            chart5.Series["Series5"].XValueMember = "X";
+            chart5.Series["Series5"].YValueMembers = "U-4";
+
+            chart5.Series["Series6"].XValueMember = "X";
+            chart5.Series["Series6"].YValueMembers = "U-5";
+            
         }
     }
 }

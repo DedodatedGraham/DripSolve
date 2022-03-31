@@ -65,7 +65,7 @@ namespace DripSolve
                     SolveLF(0.0);
                     break;
                 case 3:
-                    SolveKT();
+                    SolveKT(0.0);
                     break;
                 case 4:
                     SolveCD(0.01/Math.PI);
@@ -202,9 +202,8 @@ namespace DripSolve
                 flux.Add(tflux);
             }
         }
-        public void SolveKT()
+        public void SolveKT(double v)
         {
-            double v = 0;
             for(int t = 0; t < time.Count; t++)
             {
                 List<double> tsol = new List<double>();
