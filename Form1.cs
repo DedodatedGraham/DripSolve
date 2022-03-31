@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,10 @@ namespace DripSolve
         public List<double> E2dy;
         public List<double> E2Error;
 
+        #endregion
+
+        #region Bugers variables
+        public Bugers berg { get; set; } 
         #endregion
         public List<List<double>> plots;
 
@@ -475,6 +480,16 @@ namespace DripSolve
 
 
             }
+        }
+
+        private void materialButton7_Click(object sender, EventArgs e)
+        {
+            //Bugers solve button click
+            double dx = double.Parse(materialTextBox5.Text);
+            berg = new Bugers(dx);
+            berg.Solve(materialComboBox2.SelectedIndex + 1);
+            //Next now that it is solved we can display the solution on the results tab
+
         }
     }
 }
