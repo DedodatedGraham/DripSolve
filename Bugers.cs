@@ -61,14 +61,6 @@ namespace DripSolve
             {
                 case 1:
                     SolveCD(0.0);
-                    if(dt/dx <= 1)
-                    {
-                        stability = "Stable";
-                    }
-                    else
-                    {
-                        stability = "Unstable";
-                    }
                     break;
                 case 2:
                     SolveLF(0.0);
@@ -79,14 +71,6 @@ namespace DripSolve
                     break;
                 case 4:
                     SolveCD(0.01/Math.PI);
-                    if (dt / dx <= 1)
-                    {
-                        stability = "Stable";
-                    }
-                    else
-                    {
-                        stability = "Unstable";
-                    }
                     break;
                 case 5:
                     SolveLF(0.01 / Math.PI);
@@ -112,23 +96,23 @@ namespace DripSolve
                     {
                         if(x == 0)
                         {
-                            double fpos = ((flux[t - 1][x] + flux[t - 1][space.Count - 1]) / 2);
-                            double fneg = ((flux[t - 1][x + 1] + flux[t - 1][x]) / 2);
-                            double temp = (-1 * dt / dx) * (fpos - fneg) + solution[t - 1][x];
+                            double fneg = ((flux[t - 1][x] + flux[t - 1][space.Count - 1]) / 2);
+                            double fpos = ((flux[t - 1][x + 1] + flux[t - 1][x]) / 2);
+                            double temp = (-dt / dx) * (fpos - fneg) + solution[t - 1][x];
                             tsol.Add(temp);
                         }
                         else if(x == space.Count - 1)
                         {
-                            double fpos = ((flux[t - 1][x] + flux[t - 1][x - 1]) / 2);
-                            double fneg = ((flux[t - 1][0] + flux[t - 1][x]) / 2);
-                            double temp = (-1 * dt / dx) * (fpos - fneg) + solution[t - 1][x];
+                            double fneg = ((flux[t - 1][x] + flux[t - 1][x - 1]) / 2);
+                            double fpos = ((flux[t - 1][0] + flux[t - 1][x]) / 2);
+                            double temp = (-dt / dx) * (fpos - fneg) + solution[t - 1][x];
                             tsol.Add(temp);
                         }
                         else
                         {
-                            double fpos = ((flux[t - 1][x] + flux[t - 1][x - 1]) / 2);
-                            double fneg = ((flux[t - 1][x + 1] + flux[t - 1][x]) / 2);
-                            double temp = (-1 * dt / dx) * (fpos - fneg) + solution[t - 1][x];
+                            double fneg = ((flux[t - 1][x] + flux[t - 1][x - 1]) / 2);
+                            double fpos = ((flux[t - 1][x + 1] + flux[t - 1][x]) / 2);
+                            double temp = (-dt / dx) * (fpos - fneg) + solution[t - 1][x];
                             tsol.Add(temp);
                         }
                         
@@ -139,24 +123,32 @@ namespace DripSolve
                 //Next gets flux for current time step
                 for(int x = 0; x < space.Count; x++)
                 {
-                    if(x == 0)
+                    if(v != 0)
                     {
-                        double left = Math.Pow(Math.Abs(solution[t][x]), 2);
-                        double right = (v / (2 * dx)) * (solution[t][x + 1] - solution[t][space.Count - 1]);
-                        tflux.Add(left - right);
-                    }
-                    else if(x == space.Count - 1)
-                    {
-                        double left = Math.Pow(Math.Abs(solution[t][x]), 2);
-                        double right = (v / (2 * dx)) * (solution[t][0] - solution[t][x - 1]);
-                        tflux.Add(left - right);
+                        if (x == 0)
+                        {
+                            double left = Math.Pow(Math.Abs(solution[t][x]), 2);
+                            double right = (v / (2 * dx)) * (solution[t][x + 1] - solution[t][space.Count - 1]);
+                            tflux.Add(left - right);
+                        }
+                        else if (x == space.Count - 1)
+                        {
+                            double left = Math.Pow(Math.Abs(solution[t][x]), 2);
+                            double right = (v / (2 * dx)) * (solution[t][0] - solution[t][x - 1]);
+                            tflux.Add(left - right);
+                        }
+                        else
+                        {
+                            double left = Math.Pow(Math.Abs(solution[t][x]), 2);
+                            double right = (v / (2 * dx)) * (solution[t][x + 1] - solution[t][x - 1]);
+                            tflux.Add(left - right);
+                        }
                     }
                     else
                     {
-                        double left = Math.Pow(Math.Abs(solution[t][x]), 2);
-                        double right = (v / (2 * dx)) * (solution[t][x + 1] - solution[t][x - 1]);
-                        tflux.Add(left - right);
+                        tflux.Add(Math.Pow(Math.Abs(solution[t][x]), 2));
                     }
+                    
                 }
                 flux.Add(tflux);
             }
@@ -187,21 +179,21 @@ namespace DripSolve
                             //Will get the U(j,n+1)
                             double fpos = (flux[t - 1][x] + flux[t - 1][x + 1]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x + 1] - solution[t - 1][x]);//F(j+1/2,n)
                             double fmin = (flux[t - 1][x - 1] + flux[t - 1][x]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x] - solution[t - 1][x - 1]);//F(j-1/2,n)
-                            tsol.Add((dt / dx) * (fpos - fmin) + (1 / 2) * (solution[t - 1][x + 1] + solution[t - 1][x - 1]));
+                            tsol.Add((-dt / dx) * (fpos - fmin) + solution[t - 1][x]);
                         }
                         else if(x == 0)
                         {
                             //Will get the U(0,n+1)
                             double fpos = (flux[t - 1][x] + flux[t - 1][x + 1]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x + 1] - solution[t - 1][x]);//F(j+1/2,n)
                             double fmin = (flux[t - 1][space.Count - 1] + flux[t - 1][x]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x] - solution[t - 1][space.Count - 1]);//F(j-1/2,n)
-                            tsol.Add((dt / dx) * (fpos - fmin) + (1 / 2) * (solution[t - 1][x + 1] + solution[t - 1][space.Count - 1]));
+                            tsol.Add((-dt / dx) * (fpos - fmin) + solution[t - 1][x]);
                         }
                         else
                         {
                             //Will get the U(X,n+1)
                             double fpos = (flux[t - 1][x] + flux[t - 1][0]) / 2 - (dx / (2 * dt)) * (solution[t - 1][0] - solution[t - 1][x]);//F(j+1/2,n)
                             double fmin = (flux[t - 1][x - 1] + flux[t - 1][x]) / 2 - (dx / (2 * dt)) * (solution[t - 1][x] - solution[t - 1][x - 1]);//F(j-1/2,n)
-                            tsol.Add((dt / dx) * (fpos - fmin) + (1 / 2) * (solution[t - 1][0] + solution[t - 1][x - 1]));
+                            tsol.Add((-dt / dx) * (fpos - fmin) + solution[t - 1][x]);
                         }
                     }
                 }
@@ -209,17 +201,24 @@ namespace DripSolve
                 //calulates flux per timestep, it is needed to find solution at next time step
                 for (int x = 0; x < space.Count; x++)
                 {
-                    if (x != 0 && x != space.Count - 1)
+                    if(v != 0)
                     {
-                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][x + 1] - solution[t][x - 1]) / (2 * dx));
-                    }
-                    else if (x == 0)
-                    {
-                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][x + 1] - solution[t][space.Count - 1]) / (2 * dx));
+                        if (x != 0 && x != space.Count - 1)
+                        {
+                            tflux.Add((Math.Pow(solution[t][x], 2) / 2) - v * (solution[t][x + 1] - solution[t][x - 1]) / (2 * dx));
+                        }
+                        else if (x == 0)
+                        {
+                            tflux.Add((Math.Pow(solution[t][x], 2)) / 2 - v * (solution[t][x + 1] - solution[t][space.Count - 1]) / (2 * dx));
+                        }
+                        else
+                        {
+                            tflux.Add((Math.Pow(solution[t][x], 2)) / 2 - v * (solution[t][0] - solution[t][x - 1]) / (2 * dx));
+                        }
                     }
                     else
                     {
-                        tflux.Add(Math.Pow(solution[t][x], 2) / 2 - v * (solution[t][0] - solution[t][x - 1]) / (2 * dx));
+                        tflux.Add((Math.Pow(solution[t][x], 2)));
                     }
 
                 }

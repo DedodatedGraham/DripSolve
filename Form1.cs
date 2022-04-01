@@ -64,8 +64,8 @@ namespace DripSolve
             chart1.ChartAreas[0].AxisX.Minimum = -1.0;
             chart1.ChartAreas[0].AxisX.Maximum =  1.0;
 
-            chart5.ChartAreas[0].AxisY.Maximum = 1;
-            chart5.ChartAreas[0].AxisY.Minimum = -1;
+            chart5.ChartAreas[0].AxisY.Maximum = 10;
+            chart5.ChartAreas[0].AxisY.Minimum = -10;
             chart5.ChartAreas[0].AxisX.Maximum = 1;
             chart5.ChartAreas[0].AxisX.Minimum = -1;
 
